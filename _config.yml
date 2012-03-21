@@ -5,7 +5,7 @@ permalink: /:categories/:year/:month/:day/:title
 
 # Jekyll Bootstrap
 title : Zopatista
-tagline: "Martijn Pieters' personal site"
+tagline: Invisible Framework Ninja
 author :
   name : Martijn Pieters
   email : mj@zopatista.com

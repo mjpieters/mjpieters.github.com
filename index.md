@@ -1,9 +1,11 @@
 ---
 layout: page
 title: Martijn Pieters
-tagline: Open Source software engineer
+tagline: Invisible Framework Coding Ninja
 ---
 {% include JB/setup %}
+
+Senior Open Software Engineer with a long history in serious web applications and content management.
 
 {% if site.posts != empty %}
 ## Blog
