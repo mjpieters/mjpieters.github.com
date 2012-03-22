@@ -2,12 +2,13 @@
 layout: post
 category: plone
 title: "Saving the day: recovering lost objects"
+description: When a customer discovers over a week later that an important object was accidentially deleted, what do you do?
 tags : [recovery, beforestorage]
 ---
 {% include JB/setup %}
 *This article was originally published on [jarn.com](http://jarn.com).*
 
-When a customer discovers over a week later that an important object was accidentially deleted, what do you do?
+*When a customer discovers over a week later that an important object was accidentially deleted, what do you do?*
 
 ## Oh noes!
 

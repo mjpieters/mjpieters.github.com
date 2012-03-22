@@ -2,6 +2,7 @@
 layout: post
 category: plone
 title: The dreaded plone.relations IntId KeyError
+description: When IntIds go missing, the going gets tough. Specifically, plone.app.relations and related packages do not deal gracefully when a relationship source or target is missing. Here is how we clear such broken relationships.
 tags : [plone.relations, IntIds, KeyError]
 ---
 {% include JB/setup %}

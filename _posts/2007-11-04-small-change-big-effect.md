@@ -2,6 +2,7 @@
 layout: post
 category: plone
 title: Small change, big effect
+description: How changing one line halved the time it took to rename a Plone folder.
 tags : [performance, indexing, rename]
 ---
 {% include JB/setup %}

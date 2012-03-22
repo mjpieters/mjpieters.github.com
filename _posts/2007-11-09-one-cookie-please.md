@@ -2,6 +2,7 @@
 layout: post
 category: plone
 title: One cookie please, but hold the pickles
+description: The python pickle module is dangerous, didn't you know?
 tags : [cookies, pickling, pickles, security]
 ---
 {% include JB/setup %}
