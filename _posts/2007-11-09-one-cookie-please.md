@@ -40,7 +40,7 @@ With statusmessages for example, each message consists of a message and a type s
 > But it is incorrect. CATS is still alive.<br />
 > ZIG-01 must fight against CATS again.<br />
 > And down with them completely !<br />
-> Good luck.<br />
-> -- [Zero Wing, 1989](http://en.wikipedia.org/wiki/All_your_base_are_belong_to_us)
-
-
+> Good luck.
+>
+> <small markdown="1">[Zero Wing, 1989](http://en.wikipedia.org/wiki/All_your_base_are_belong_to_us)</small>
+{: cite=http://en.wikipedia.org/wiki/All_your_base_are_belong_to_us}
