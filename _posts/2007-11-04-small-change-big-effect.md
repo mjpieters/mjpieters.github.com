@@ -33,7 +33,7 @@ Luckily, for the object_provides index use-case, interfaceToName is overkill. Fi
 
 But more importantly, the index contents are never used to find the original interfaces again. Quite the contrary, it is only used to search what objects provide a given interface, and the developer querying the catalog will have to generate the same string format every time they search. So, with the index using interfaceToName to fill the index, searching the index also requires developers to use interfaceToName to query the index. Search for IATFolder? Pass in interfaceToName(IATFolder) and hit the same performance problem.
 
-<img alt="Renaming performance increase" src="{{BASE_PATH}}/assets/images/renaming-performance-increase.png" style="float: right" />
+![Renaming performance increase]({{BASE_PATH}}/assets/images/renaming-performance-increase.png){: .pull-right}
 ## Unique identifier
 
 So if interfaceToName is overkill, what unique identifier should we use then? As we already mentioned, when you register an interface in the first place, the default name is the dotted name of the interface. It's a unique identifier, as it's the name under which python stores it in memory. It is available as the `__identifier__` attribute on the interface. As it's unique, and available directly from the interfaces themselves, it's ideally suited for both indexing and searching.
