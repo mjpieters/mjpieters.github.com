@@ -19,6 +19,8 @@ Senior Open Software Engineer with a long history in serious web applications an
 
 ## Elsewhere
 
+![Martijn Pieters by Tesdal](https://farm2.staticflickr.com/1288/1275693477_a6a44b743e_q.jpg){: .pull-right}
+
  * [google+](https://plus.google.com/102702654953333047001)
  * [github](https://github.com/mjpieters)
  * [twitter](http://twitter.com/zopatista)
