@@ -45,7 +45,13 @@ def removeKeyErrorRelationship(iid):
                 relIndex._remove(relid, (iid,), direction)
             else:
                 relation = keyref.object
-                relation.__parent__.remove(relation)
+                try:
+                    relation.__parent__.remove(relation)
+                except AttributeError:
+                    # The relation object only exists in the intid utility;
+                    # in this case __parent__ is None.
+                    relIndex.unindex(relation)
+                    intids.unregister(keyref)
 {% endhighlight %}
 
 Note that this method assumes you already have [the local site manager set up properly](http://stackoverflow.com/questions/5819978/how-do-i-trigger-portal-quickinstaller-reinstallproducts-form-outside-the-plone-s/5820885#5820885). This is a great little method to get rid of individual KeyError problems.
@@ -79,7 +85,13 @@ def clearAllMissingLinks():
                     relIndex._remove(relid, (iid,), direction)
                 else:
                     relation = keyref.object
-                    relation.__parent__.remove(relation)
+                    try:
+                        relation.__parent__.remove(relation)
+                    except AttributeError:
+                        # The relation object only exists in the intid utility;
+                        # in this case __parent__ is None.
+                        relIndex.unindex(relation)
+                        intids.unregister(keyref)
                 rtotal += 1
     return itotal, rtotal
 {% endhighlight %}
@@ -89,3 +101,7 @@ Note that this method returns the total number of intids identified, as well as 
 ## Patch the leak?
 
 Instead of pumping out the water, we should of course patch the leak. We have yet to find it though, but if we do, we'll make sure the affected packages receive the patch!
+
+### *April 2012 Update*: clean-up methods fine-tuned.
+
+I've found that in practice some relationships only were still referenced by intid keyrefs and present in the relationships index, but no longer were present in the relationship utility itself. These have to be manually unindexed and removed; the code examples above have been updated to reflect this.
