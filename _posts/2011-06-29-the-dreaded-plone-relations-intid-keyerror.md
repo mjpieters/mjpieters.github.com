@@ -51,6 +51,7 @@ def removeKeyErrorRelationship(iid):
                     # The relation object only exists in the intid utility;
                     # in this case __parent__ is None.
                     relIndex.unindex(relation)
+                    relIndex.unindex_doc(relid) # be doubly sure
                     intids.unregister(keyref)
 {% endhighlight %}
 
@@ -91,6 +92,7 @@ def clearAllMissingLinks():
                         # The relation object only exists in the intid utility;
                         # in this case __parent__ is None.
                         relIndex.unindex(relation)
+                        relIndex.unindex_doc(relid) # be doubly sure
                         intids.unregister(keyref)
                 rtotal += 1
     return itotal, rtotal
