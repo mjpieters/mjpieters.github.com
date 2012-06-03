@@ -9,7 +9,7 @@ title : Atom Feed (Plone)
  <link href="{{ site.production_url }}/atom-plone.xml" rel="self"/>
  <link href="{{ site.production_url }}"/>
  <updated>{{ site.time | date_to_xmlschema }}</updated>
- <id>{{ site.production_url }}</id>
+ <id>{{ site.production_url }}/plone</id>
  <author>
    <name>{{ site.author.name }}</name>
    <email>{{ site.author.email }}</email>
