@@ -8,7 +8,7 @@ tags : [performance, indexing, rename]
 {% include JB/setup %}
 *This article was originally published on [jarn.com](http://jarn.com).*
 
-*How changing one line halved the time it took to rename a Plone folder.*
+*{{ page.description }}*
 
 Here at the Plone Performance sprint, Matt Hamilton and Sasha Vincic are homing in on the Catalog and folder renaming. As Sasha already [reported earlier](http://valentinewebsystems.com/archive/2007/11/02/indexing-in-plone-got-twice-as-fast), they identified the object_provides index as a potential bottleneck.
 

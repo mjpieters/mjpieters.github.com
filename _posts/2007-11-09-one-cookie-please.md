@@ -8,7 +8,7 @@ tags : [cookies, pickling, pickles, security]
 {% include JB/setup %}
 *This article was originally published on [jarn.com](http://jarn.com).*
 
-*The python pickle module is dangerous, didn't you know?*
+*{{ page.description }}*
 
 ## All your base are belong to us
 
