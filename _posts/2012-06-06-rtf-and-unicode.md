@@ -214,7 +214,6 @@ The module in fact registers a new codec, called `rtfunicode`, so after you impo
 
 Hopefully it comes in handy for others. Feedback is most welcome, as are patches!
 
-
 *[RTF]: Rich Text Format
 *[ASCII]: American Standard Code for Information Interchange
 *[BMP]: Basic Multilingual Plane
