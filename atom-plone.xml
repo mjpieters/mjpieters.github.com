@@ -15,7 +15,7 @@ layout: nil
  </author>
 
  {% for post in site.posts %}
- {% if post.categories contains 'plone' %}
+ {% if post.categories contains 'plone' or post.categories contains 'python' %}
  <entry>
    <title>{{ post.title }}</title>
    <link href="{{ site.production_url }}{{ post.url }}"/>
