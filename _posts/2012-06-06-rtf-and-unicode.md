@@ -198,7 +198,7 @@ On a UCS-4 platform the codepoint will be ignored by the regular expression and 
 
 I am calling this 'unsupported' and a day. Suggestions for implementing this in a neat and performant way are welcome!
 
-## Of to PyPI we go
+## Off to PyPI we go
 
 I am quite happy with the simple regular expression method, and prefer it over the character-by-character loop.
 
