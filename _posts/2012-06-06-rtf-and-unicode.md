@@ -41,7 +41,7 @@ A quick search with Google showed me how [pyrtf-ng encodes unicode points](https
 
 Unfortunately, the above snippet does a few things wrong: it uses a control code for *every* character in the unicode string, producing output that is at least 5 times as long as the input, and it doesn't produce negative numbers for codepoints over `\u7fff`:
 
-{% highlight python %}
+{% highlight pycon %}
 >>> example = u'CJK Ideograph: \u8123'
 >>> ''.join(['\u%s?' % str(ord(e)) for e in example])
 u'\\u67?\\u74?\\u75?\\u32?\\u73?\\u100?\\u101?\\u111?\\u103?\\u114?\\u97?\\u112?\\u104?\\u58?\\u32?\\u33059?'
@@ -49,14 +49,14 @@ u'\\u67?\\u74?\\u75?\\u32?\\u73?\\u100?\\u101?\\u111?\\u103?\\u114?\\u97?\\u112?
 
 A recent [Stack Overflow answer](http://stackoverflow.com/a/9912561/100297) improved on this by only encoding characters over `\u007f` (decimal 127) but it still iterates over every character in the string to do so:
 
-{% highlight python %}
+{% highlight pycon %}
 >>> ''.join(['\u%s?' % str(ord(e)) if ord(e) > 127 else e for e in example])
 u'CJK Ideograph: \\u33059?'
 {% endhighlight %}
 
 This outputs unicode because codepoints < 128 are left untouched; numbers are not properly converted to signed shorts either. Here is my variation that remedies these things, and dispenses with the `str()` call:
 
-{% highlight python %}
+{% highlight pycon %}
 >>> ''.join(['\u%i?' % (ord(e) if e < u'\u8000' else ord(e) - 65536) if (e > '\x7f' or e < '\x20' or e in u'\\{}') else str(e) for e in example])
 'CJK Ideograph: \\u-32477?'
 {% endhighlight %}
@@ -69,7 +69,7 @@ While casting around for my own solution, I also looked into the Python [`codecs
 
 Well, if you combine this with a bit of [`re.sub`](http://docs.python.org/library/re.html#re.sub) magic, you can in fact produce convincing RTF command sequences:
 
-{% highlight python %}
+{% highlight pycon %}
 >>> import re
 >>> import struct
 >>> _charescape = re.compile(r'(?<!\\)\\(?:x([0-9a-fA-F]{2})|u([0-9a-fA-F]{4}))')
@@ -93,7 +93,7 @@ Of course, the above trick does not handle newlines, returns or tabs (`\n`, `\r`
 
 So this time around I decided to time these:
 
-{% highlight python %}
+{% highlight pycon %}
 >>> import timeit
 >>> def test1(): ''.join(['\u%i?' % (ord(e) if e < u'\u8000' else ord(e) - 65536) if (e > '\x7f' or e < '\x20' or e in u'\\{}') else str(e) for e in testdocument])
 ... 
@@ -117,7 +117,7 @@ But I am actually being too clever by half (read: pretty dumb really); why did I
 
 But aren't regular expressions quite good at finding those classes all by themselves? I may as well use a decent expression that selects what needs to be encoded directly:
 
-{% highlight python %}
+{% highlight pycon %}
 >>> _charescape_direct = re.compile(u'([\x00-\x1f\\\\{}\x80-\uffff])')
 >>> def _replace_direct(match):
 ...     codepoint = ord(match.group(1))
@@ -138,7 +138,7 @@ We could also use a [translation table](http://docs.python.org/library/stdtypes.
 
 Before digging into clever solutions to that, I should perhaps first test the speed of a simple translation table, one that only covers codepoints up to '\u00ff', or latin-1:
 
-{% highlight python %}
+{% highlight pycon %}
 >>> _table = {i: u"\\'{0:02x}".format(i) for i in xrange(0, 32)}
 >>> _table.update({ord(c): u"\\'{0:02x}".format(ord(c)) for c in '\\{}'})
 >>> _table.update({i: u"\\u{0}".format(i) for i in xrange(128, 256)})
@@ -150,7 +150,7 @@ Before digging into clever solutions to that, I should perhaps first test the sp
 
 Unfortunately, using `.translate` turns out to be slowing us down considerably. Reducing the table to just a few codepoints doesn't help either:
 
-{% highlight python %}
+{% highlight pycon %}
 >>> _basictable = {ord(c): u"\\'{0:02x}".format(ord(c)) for c in '\n\r\t\\{}'}
 >>> len(_basictable)
 6
@@ -166,7 +166,7 @@ So far, I've compared methods by testing them against some Norwegian text, typic
 
 To get a more complete picture, I need to test these methods against a worst-case scenario, a UTF-8 encoded test set from a great set of [UTF-8 test documents](https://github.com/bits/UTF-8-Unicode-Test-Documents):
 
-{% highlight python %}
+{% highlight pycon %}
 >>> import urllib
 >>> utf8_sequence = urllib.urlopen('https://raw.github.com/bits/UTF-8-Unicode-Test-Documents/master/UTF-8_sequence_unseparated/utf8_sequence_0-0xffff_assigned_printable_unseparated.txt').read().decode('utf-8')
 >>> len(utf8_sequence)
@@ -186,7 +186,7 @@ So far I've focused only on characters within the [BMP](https://en.wikipedia.org
 
 However, I cannot at this time be bothered to extend my encoder to support such codepoints. On a UCS-2-compiled python there is a happy coincidence that codepoints beyond the BMP are treated mostly like UTF-16 surrogate pairs anyway, so they are sort-of supported by this method:
 
-{% highlight python %}
+{% highlight pycon %}
 >>> beyond = u'\U00010196'
 >>> _charescape_direct.sub(_replace_direct, beyond).encode('ascii')
 '\\u-10240?\\u-8810?'
@@ -206,7 +206,7 @@ So I packaged up my regular expression method as a handy [module on PyPI](https:
 
 The module in fact registers a new codec, called `rtfunicode`, so after you import the package all you need do is use the new codec in the `.encode()` method:
 
-{% highlight python %}
+{% highlight pycon %}
 >>> import rtfunicode
 >>> declaration.encode('rtfunicode')
 'Alle mennesker er f\\u248?dt frie og med samme menneskeverd og menneskerettigheter. De er utstyrt med fornuft og samvittighet og b\\u248?r handle mot hverandre i brorskapets \\u229?nd.'
