@@ -111,7 +111,7 @@ The above `plone:portlet` declaration registers a portlet that is hidden by defa
 
 This all works great, unless you use a dedicated view for ESI rendering of the portlets. Suddenly the current view is no longer `MyChainView` or `StoreView`, but rather `@@right-column`. Thus the dedicated renderer is skipped in favour of the `.localportlet.Hidden` renderer, which does what it says on the tin: not render.
 
-## Reconstruct the whole context
+## Reconstruct the *whole* context
 
 The solution is of course to reconstruct the whole context; the `@@right-column` view already had most things right, only the current view is wrong. With a simple set of TAL declarations we can set up a new value for the `view` variable when rendering the portlets. Here is the reworked `main_template.pt` code:
 
