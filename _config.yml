@@ -114,13 +114,9 @@ JB :
 # GitHub pages defaults
 pygments: true
 
-# Locally, we run this in dev mode of course
-auto: true
-
 # Jekyll defaults (explicit is better than implicit)
 safe: false # GitHub sets this to true but this is how JB detects a local test
-server: false
-server_port: 4000
+port: 4000
 baseurl: /
 url: http://localhost:4000
 
