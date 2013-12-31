@@ -7,6 +7,8 @@ tagline: Invisible Framework Coding Ninja
 
 Senior Open Software Engineer with a long history in serious web applications and content management.
 
+I am available on a freelance basis; drop me a line if you have hard Python problems to crack.
+
 {% if site.posts != empty %}
 ## Blog
 
@@ -23,14 +25,15 @@ Senior Open Software Engineer with a long history in serious web applications an
 
 ## Elsewhere
 
- * [google+](https://plus.google.com/102702654953333047001)
- * [github](https://github.com/mjpieters)
- * [twitter](http://twitter.com/zopatista)
  * [linkedin](http://www.linkedin.com/in/zopatista)
+ * [google+](https://plus.google.com/102702654953333047001)
+ * [twitter](http://twitter.com/zopatista)
+ * [flickr](http://www.flickr.com/people/51101465@N00/)
+ * [last.fm](http://www.last.fm/user/mjpieters)
  {: .span3}
 
- * [flickr](http://www.flickr.com/people/51101465@N00/)
+ * [codementor](https://www.codementor.io/mjpieters)
  * [stackoverflow](http://stackoverflow.com/users/100297/martijn-pieters)
- * [last.fm](http://www.last.fm/user/mjpieters)
+ * [github](https://github.com/mjpieters)
  * [ohloh](https://www.ohloh.net/accounts/mjpieters)
  {: .span3}
