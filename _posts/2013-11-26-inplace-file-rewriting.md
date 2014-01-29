@@ -98,7 +98,7 @@ def inplace(filename, mode='r', buffering=-1, encoding=None, errors=None,
             pass
 {% endhighlight %}
 
-This context manager deliberately focuses on just *one* file, and ignores `sys.stdin`, unline the `fileinput` module. It is aimed squarly at just replacing a file in-place.
+This context manager deliberately focuses on just *one* file, and ignores `sys.stdin`, unlike the `fileinput` module. It is aimed squarly at just replacing a file in-place.
 
 Usage example, in Python 2, with the CSV module:
 
