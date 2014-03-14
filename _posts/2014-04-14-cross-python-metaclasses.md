@@ -9,7 +9,7 @@ tags : [metaclass, decorator, python-2-and-3]
 
 *{{ page.description }}*
 
-When you want to create using a metaclass, making it compatible with both Python 2 and 3 can be a little tricky. 
+When you want to create a class including a metaclass, making it compatible with both Python 2 and 3 can be a little tricky. 
 
 The excellent [`six` library](http://pythonhosted.org/six/) provides you with a [`six.with_metaclass()` factory function](http://pythonhosted.org/six/#six.with_metaclass) that'll generate a base class for you from a given metaclass:
 
