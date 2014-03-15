@@ -43,7 +43,11 @@ Rather than creating a base class, I've come up with a class decorator that repl
 {% highlight python %}
 def with_metaclass(mcls):
     def decorator(cls):
-        return mcls(cls.__name__, cls.__bases__, cls.__dict__.copy())
+        body = vars(cls).copy()
+        # clean out class body
+        body.pop('__dict__', None)
+        body.pop('__weakref__', None)
+        return mcls(cls.__name__, cls.__bases__, body)
     return decorator
 {% endhighlight %}
 
@@ -68,4 +72,16 @@ which results in a cleaner MRO:
 <class '__main__.Meta'>
 >>> MyClass.__mro__
 (<class '__main__.MyClass'>, <class '__main__.Base'>, <type 'object'>)
+{% endhighlight %}
+
+## Update
+
+As it turns out, [Jason Coombs took Guido's time machine](https://bitbucket.org/gutworth/six/pull-request/12/add-patch_with_metaclass-which-provides-a) and added the same functionality to the `six` library last summer. Not only that, he included support for classes with `__slots__` in his version. Thanks to [Mikhail Korobov](http://kmike.ru/) for pointing this out.
+
+The `six` decorator is called [`@six.add_metaclass()`](http://pythonhosted.org/six/#six.add_metaclass):
+
+{% highlight python %}
+@six.add_metaclass(Meta)
+class MyClass(Base):
+    pass
 {% endhighlight %}
