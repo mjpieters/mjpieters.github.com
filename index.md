@@ -25,15 +25,22 @@ I am available on a freelance basis; drop me a line if you have hard Python prob
 
 ## Elsewhere
 
- * [linkedin](http://www.linkedin.com/in/zopatista)
- * [google+](https://plus.google.com/102702654953333047001)
  * [twitter](http://twitter.com/zopatista)
+ * [google+](https://plus.google.com/102702654953333047001)
+ * [linkedin](http://www.linkedin.com/in/zopatista)
+ * [primelist](https://www.primelist.com/martijn-pieters/)
+ {: .span3}
+
+ * [stackoverflow](http://stackoverflow.com/users/100297/martijn-pieters)
+ * [codementor.io](https://www.codementor.io/mjpieters)
+ * [airpair.com](airpair.me/zopatista)
+ * [github](https://github.com/mjpieters)
+ {: .span3}
+
+ * [ohloh](https://www.ohloh.net/accounts/mjpieters)
  * [flickr](http://www.flickr.com/people/51101465@N00/)
  * [last.fm](http://www.last.fm/user/mjpieters)
  {: .span3}
 
- * [codementor](https://www.codementor.io/mjpieters)
- * [stackoverflow](http://stackoverflow.com/users/100297/martijn-pieters)
- * [github](https://github.com/mjpieters)
- * [ohloh](https://www.ohloh.net/accounts/mjpieters)
- {: .span3}
+<script type="text/javascript" src="http://se-flair.appspot.com/35417.js"></script>
+
