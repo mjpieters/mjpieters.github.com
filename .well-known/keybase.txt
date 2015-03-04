@@ -1,0 +1,61 @@
+==================================================================
+https://keybase.io/zopatista
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://www.zopatista.com
+  * I am zopatista (https://keybase.io/zopatista) on keybase.
+  * I have a public key with fingerprint 7037 7A88 E2D5 5007 728F  DC81 DF16 A3D8 63AF 80FD
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "70377a88e2d55007728fdc81df16a3d863af80fd",
+            "host": "keybase.io",
+            "key_id": "df16a3d863af80fd",
+            "kid": "01116c0dc25ffc2f8b5430e882584c1321508c6b3234f99d6c78ea9c112356a65fef0a",
+            "uid": "cd293d5b189fcd38f1d7c4e0c7a33219",
+            "username": "zopatista"
+        },
+        "service": {
+            "hostname": "www.zopatista.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1425489669,
+    "expire_in": 157680000,
+    "prev": "8af4aee329452ce20c5790b112f5aecd30681932b02a048b7e0448b688225895",
+    "seqno": 4,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+owFtkruLFEEQxtdbxQcYnIGBkXQoy9Lv6V6DMzA8E9F46Uf1XrN3M+PM3O6tx4GB
+gaFgYCSKgomBGPoHGIiZgRhpLJgLgmjNchrZSdFVX/2666Menh8ONja/XnzxOby+
+9+vEh29+cOvH1tlD4qu4IpNDMod1SLmcQVM3uezIhBRUFIUzBnhUitKi4CbFYFhM
+TDsRjRYuGZoiGZGdqu07EONdC+NcYQ4v0xwx+x/9fF2gjDEdaAxcpRR4Ml5JQcEY
+rowMTHCmqAnaCy5ksjbqUBhwNjDGhdJOqwSJOsTtr3Ehciui8szYFKIwicUiSKCh
+cAJZthe20JRuD1B9t6pdl9vOkaMRwfQiB+g96Ec5liyXy/E/2ThUe0iom6qrQrWL
+5Z2uqyd9d7eq13Lw02PQ1OcyopnYsICmzVVJJgyVocs9mUmupLFa2xGBgzo3MM29
+QhXaUDz9M7BApHFJOgDBrVQ8AKdBFZZ6NCApBzgk1YZZwT3ljkrjC6ASg0YL0UOr
+SD/anbIiE4nfdDNEtnlWutPdfgPk6NyDreGp9Sr83Y3NjU9y8PRGF05ee/Py+u3h
+k5u7X543by9deD949urMlfj78vznavvx9v2P7x5ddeb7Hw==
+=qifq
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/zopatista
+
+==================================================================
+
