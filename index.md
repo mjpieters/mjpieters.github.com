@@ -34,9 +34,10 @@ I am available on a freelance basis; drop me a line if you have hard Python prob
  * [stackoverflow](http://stackoverflow.com/users/100297/martijn-pieters)
  * [codementor.io](https://www.codementor.io/mjpieters)
  * [airpair.com](airpair.me/zopatista)
- * [github](https://github.com/mjpieters)
+ * [keybase.io](https://keybase.io/zopatista)
  {: .span3}
 
+ * [github](https://github.com/mjpieters)
  * [ohloh](https://www.ohloh.net/accounts/mjpieters)
  * [flickr](http://www.flickr.com/people/51101465@N00/)
  * [last.fm](http://www.last.fm/user/mjpieters)
