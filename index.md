@@ -33,7 +33,7 @@ I am available on a freelance basis; drop me a line if you have hard Python prob
 
  * [stackoverflow](http://stackoverflow.com/users/100297/martijn-pieters)
  * [codementor.io](https://www.codementor.io/mjpieters)
- * [airpair.com](https://airpair.me/zopatista)
+ * [airpair.com](http://airpair.me/zopatista)
  * [keybase.io](https://keybase.io/zopatista)
  {: .span3}
 
