@@ -5,9 +5,7 @@ tagline: Invisible Framework Coding Ninja
 ---
 {% include JB/setup %}
 
-Senior Open Software Engineer with a long history in serious web applications and content management.
-
-I am available on a freelance basis; drop me a line if you have hard Python problems to crack.
+Senior Software Engineer at Facebook with a long history in serious web applications and content management.
 
 {% if site.posts != empty %}
 ## Blog
