@@ -26,16 +26,13 @@ Senior Software Engineer at Facebook with a long history in serious web applicat
  * [twitter](http://twitter.com/zopatista)
  * [google+](https://plus.google.com/102702654953333047001)
  * [linkedin](http://www.linkedin.com/in/zopatista)
- * [primelist](https://www.primelist.com/martijn-pieters/)
  {: .span3}
 
  * [stackoverflow](http://stackoverflow.com/users/100297/martijn-pieters)
- * [codementor.io](https://www.codementor.io/mjpieters)
- * [airpair.com](http://airpair.me/zopatista)
+ * [github](https://github.com/mjpieters)
  * [keybase.io](https://keybase.io/zopatista)
  {: .span3}
 
- * [github](https://github.com/mjpieters)
  * [ohloh](https://www.ohloh.net/accounts/mjpieters)
  * [flickr](http://www.flickr.com/people/51101465@N00/)
  * [last.fm](http://www.last.fm/user/mjpieters)
