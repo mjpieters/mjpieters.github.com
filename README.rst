@@ -10,6 +10,16 @@ redirects would otherwise be too cumbersome to support.
 Running locally
 ===============
 
+Make sure `bundle` is installed:
+
+.. code-block:: bash
+
+   $ sudo gem install bundle
+
+then install all dependencies
+
+   $ bundle install --path vendor/bundle
+
 Keep the local toolchain up-to-date with:
 
 .. code-block:: bash

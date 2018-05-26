@@ -1,6 +1,14 @@
 # Site-specific config
 exclude:
-- README.rst
+  - README.rst
+  - CHANGELOG.md
+  - CNAME
+  - Gemfile
+  - Gemfile.lock
+  - .gitignore
+  - .bundle
+  - .git
+  - vendor
 permalink: /:categories/:year/:month/:day/:title 
 
 # Jekyll Bootstrap
