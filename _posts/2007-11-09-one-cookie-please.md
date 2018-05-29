@@ -4,10 +4,8 @@ category: plone
 title: One cookie please, but hold the pickles
 description: The python pickle module is dangerous, didn't you know?
 tags : [cookies, pickling, pickles, security]
+date: 2007-11-09 12:00:00 +0100
 ---
-{% include JB/setup %}
-*This article was originally published on [jarn.com](http://jarn.com).*
-
 *{{ page.description }}*
 
 ## All your base are belong to us
@@ -34,14 +32,15 @@ So next time you need to preserve data across HTTP requests, please do not be te
 
 With statusmessages for example, each message consists of a message and a type string, both unicode. So we changed to a hand-rolled format using a 2 byte length header (11 bits of message length, 5 for the type) directly followed by the message and type strings (encoded to utf-8). When reading this from a cookie again later, the decoder simply has to read the lengths from the first 2 bytes, then read the right amount of characters to get the message and type back. A similar method was used to encode the linkintegrity data. Simple, effective, and impervious to attacks.
 
-> Congratulation!!<br />
-> A.D.2111<br />
-> All bases of CATS were destroyed.<br />
-> It seems to be peaceful.<br />
-> But it is incorrect. CATS is still alive.<br />
-> ZIG-01 must fight against CATS again.<br />
-> And down with them completely !<br />
-> Good luck.
->
-> <small markdown="1">[Zero Wing, 1989](http://en.wikipedia.org/wiki/All_your_base_are_belong_to_us)</small>
-{: cite=http://en.wikipedia.org/wiki/All_your_base_are_belong_to_us}
+> Congratulation!!  
+> A.D.2111  
+> All bases of CATS were destroyed.  
+> It seems to be peaceful.  
+> But it is incorrect. CATS is still alive.  
+> ZIG-01 must fight against CATS again.  
+> And down with them completely !  
+> Good luck.  
+> <cite>[Zero Wing, 1989](http://en.wikipedia.org/wiki/All_your_base_are_belong_to_us)</cite>
+{: cite="http://en.wikipedia.org/wiki/All_your_base_are_belong_to_us"}
+
+*This article was originally published on [jarn.com](http://jarn.com).*

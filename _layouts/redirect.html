@@ -1,13 +1,19 @@
+{% comment %}
+Customised version of the jekyll-redirect-to template to add google analytics into the header
+{% endcomment %}
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta http-equiv="refresh" content="0;url={{ page.target }}" />
-<link rel="canonical" href="{{ page.target }}" />
-</head>
-<body>
-	The page has been moved to <a href="{{ page.target }}">here</a>, please update your bookmarks.
-
-    {% include JB/analytics %}
+  <meta charset="utf-8">
+  <title>Redirecting&hellip;</title>
+  <link rel="canonical" href="{{ page.redirect.to }}">
+  <meta http-equiv="refresh" content="0; url={{ page.redirect.to }}">
+  <meta name="robots" content="noindex">
+  {% if site.google_analytics %}{% include site-analytics.html %}{% endif %}
+ </head>
+ <body>
+  <h1>Redirecting&hellip;</h1>
+  <a href="{{ page.redirect.to }}">Click here if you are not redirected.</a>
+  <script>location="{{ page.redirect.to }}"</script>
 </body>
 </html>

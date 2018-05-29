@@ -4,9 +4,9 @@ category: plone
 title: Portlets as ESI include
 description: Using ESI includes to cache Plone portlets separately.
 tags : [ESI, caching, portlets]
+redirect_from:
+  - /plone/2012/06/09/portlets-as-esi-include/
 ---
-{% include JB/setup %}
-
 *{{ page.description }}*
 
 To help with making a large and busy intranet website perform better, we've used a light sprinkling of [ESI](https://en.wikipedia.org/wiki/Edge_Side_Includes) (via [Varnish's ESI support](https://www.varnish-cache.org/trac/wiki/ESIfeatures)) to improve the cacheabilibty of pages in the site. By delegating assembly of parts of the page to the Varnish cache, pages become much more cacheable as frequently changing chunks such as the personal bar at the top are requested separately.
@@ -15,18 +15,18 @@ To help with making a large and busy intranet website perform better, we've used
 
 One such chunk we separated out is the right-hand portlets column. Varnish has been configured to set a special header so that we can detect that ESI is supported:
 
-{% highlight c %}
+```c
 sub vcl_recv {
     ...
     # Indicate that a varnish capable of doing ESI is in front...
     set req.http.X-ESI = "esi";
     ...
 }
-{% endhighlight %}
+```
 
 Using this header we can then conditionally swap out the portlets column with an `<esi:include>` statement; this makes site development much easier as we do not have to run Varnish just to see the site working. Here is the relevant section from the `main_template.pt` file:
 
-{% highlight xml %}
+```xml
 <td id="portal-column-two"
     metal:define-slot="column_two_slot"
     tal:condition="sr">
@@ -49,13 +49,13 @@ Using this header we can then conditionally swap out the portlets column with an
     &nbsp;
   </div>
 </td>
-{% endhighlight %}
+```
 
 Note that we are making sure that ESI is also not applied when using the portlet management views.
 
 The `@@right-column` view is simply a template:
 
-{% highlight xml %}
+```xml
 <html tal:omit-tag="">
 <body tal:omit-tag="">
 
@@ -63,7 +63,7 @@ The `@@right-column` view is simply a template:
 
 </body>
 </html>
-{% endhighlight %}
+```
 
 This whole setup was working swimmingly; we could cache pages for extended periods of times with things like the portlets updating much more frequently and with caching keyed to specific groups of users.
 
@@ -77,7 +77,7 @@ Portlets are essentially rendered as part of the Zope viewlet framework. Viewlet
 
 With the lesser-known [`<plone:portletRenderer />` directive](https://github.com/plone/plone.app.portlets/blob/7a6303400b4ecf7595fb21ec9c43b38b31fb8aca/plone/app/portlets/metadirectives.py#L67), you can also vary the way portlets are rendered for the above keys. Thus, a portlet can look different in different themes, different portlet managers, or when a certain extra marker interface is present on your content objects. This is what had happened to the vanished portlets here; they had been tied to specific *views*:
 
-{% highlight xml %}
+```xml
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:plone="http://namespaces.plone.org/plone"
@@ -105,7 +105,7 @@ With the lesser-known [`<plone:portletRenderer />` directive](https://github.com
     view="foobar.types.browser.store.StoreView"
     />
 </configure>
-{% endhighlight %}
+```
 
 The above `plone:portlet` declaration registers a portlet that is hidden by default. The two `plone:portletRenderer` declarations then assign new renderers when certain views are being used instead. This neat trick allows for the portlet to be targeted very specifically.
 
@@ -115,7 +115,7 @@ This all works great, unless you use a dedicated view for ESI rendering of the p
 
 The solution is of course to reconstruct the whole context; the `@@right-column` view already had most things right, only the current view is wrong. With a simple set of TAL declarations we can set up a new value for the `view` variable when rendering the portlets. Here is the reworked `main_template.pt` code:
 
-{% highlight xml %}
+```xml
 <td id="portal-column-two"
     metal:define-slot="column_two_slot"
     tal:condition="sr">
@@ -138,11 +138,11 @@ The solution is of course to reconstruct the whole context; the `@@right-column`
     &nbsp;
   </div>
 </td>
-{% endhighlight %}
+```
 
 We use a GET parameter to pass along the name of the view to look up; I've used a double-underscore prefix here to reduce the chances we clash with a query string parameter used elsewhere in the site. The `@@right-column` view then restores this view for portlet rendering (with a fallback to the Plone default view context `@@plone`):
 
-{% highlight xml %}
+```xml
 <html tal:omit-tag="">
 <body tal:omit-tag="">
 
@@ -154,7 +154,7 @@ We use a GET parameter to pass along the name of the view to look up; I've used 
 
 </body>
 </html>
-{% endhighlight %}
+```
 
 Et voilà, our portlets are showing up good and proper again.
 

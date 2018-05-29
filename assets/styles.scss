@@ -1,0 +1,23 @@
+---
+title: false
+styles: true
+---
+
+@import "alembic";
+
+// the Stack Exchange flair is built around the content-box model
+// and doesn't reset the line-height.
+.se-flair, .se-flair * { 
+	box-sizing: content-box;
+	line-height: 14.4px;
+}
+
+// A citation entry in a blockquote is the attribution
+blockquote {
+	cite {
+	    @include fontsize(theta, all);
+		&::before {
+			content: '\2014 \00A0';
+		}
+	}
+}

@@ -1,42 +1,39 @@
 ---
-layout: page
 title: Martijn Pieters
 tagline: Invisible Framework Coding Ninja
+aside: true
+redirect_from:
+  - /tags.html
+  - /pages.html
 ---
-{% include JB/setup %}
 
-Senior Software Engineer at Facebook with a long history in serious web applications and content management.
+{% include figure.html
+	image="/assets/images/mugshot.jpg"
+	position="left"
+	width="100" %}
+Software architect, Python mentor & Consultant with a long history in serious web applications and content management.
+
+<br>
+
+I'm available as a mentor and freelancer via Codementor. Book me for one-on-one sessions or long term projects:
+[![Get help on Codementor](https://cdn.codementor.io/badges/get_help_github.svg)](https://www.codementor.io/mjpieters)
 
 {% if site.posts != empty %}
-## Blog
+## Latest blog posts
 
-<ul class="posts">
-  {% for post in site.posts %}
-  {% if post.layout != 'redirect' %}
-    <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
-  {% endif %}
+<section class="section  typeset">
+  <ul class="list  list--post">
+  {% for page in site.posts limit:3 %}
+      <li class="item  item--post">
+        <article class="article  article--post">
+          <h3><a href="{{ page.url | absolute_url }}">{{ page.title }}</a></h3>
+          {% include post-meta.html %}
+          {{ page.excerpt | markdownify | truncatewords: 60 }}
+        </article>
+      </li>
   {% endfor %}
-</ul>
+  </ul>
+</section>
 {% endif %}
 
-![Martijn Pieters by Tesdal](https://farm2.staticflickr.com/1288/1275693477_a6a44b743e_q.jpg){: .pull-right}
-
-## Elsewhere
-
- * [twitter](http://twitter.com/zopatista)
- * [google+](https://plus.google.com/102702654953333047001)
- * [linkedin](http://www.linkedin.com/in/zopatista)
- {: .span3}
-
- * [stackoverflow](http://stackoverflow.com/users/100297/martijn-pieters)
- * [github](https://github.com/mjpieters)
- * [keybase.io](https://keybase.io/zopatista)
- {: .span3}
-
- * [ohloh](https://www.ohloh.net/accounts/mjpieters)
- * [flickr](http://www.flickr.com/people/51101465@N00/)
- * [last.fm](http://www.last.fm/user/mjpieters)
- {: .span3}
-
-<script type="text/javascript" src="http://se-flair.appspot.com/35417.js"></script>
-
+<script type="text/javascript" src="https://se-flair.appspot.com/35417.js"></script>

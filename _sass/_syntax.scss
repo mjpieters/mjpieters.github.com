@@ -1,0 +1,191 @@
+// Pygment / Rouge style generation
+
+$highlight-selector: ".highlight";
+
+// Define styles for the class hierarchy as a nested map;
+// values are argument lists for the pygments-rule mixin
+// Nested elements take the parent style if not set to null
+$highlight-style: () !default;
+$highlight-style-defaults: (
+    generic: null (
+        emph: (italic: true),
+        strong: (bold: true),
+    ),
+);
+$highlight-style-classes: (
+    comment: 'c' (
+        hashbang: 'ch',
+        multiline: 'cm',
+        preproc: 'cp',
+        preprocfile: 'cpf',
+        single: 'c1',
+        special: 'cs',
+    ),
+    escape: 'esc',
+    error: 'err',
+    generic: null (
+        deleted: 'gd',
+        emph: 'ge',
+        error: 'gr',
+        heading: 'gh',
+        inserted: 'gi',
+        output: 'go',
+        prompt: 'gp',
+        strong: 'gs',
+        subheading: 'gu',
+        traceback: 'gt',
+    ),
+    highlight: 'hll',
+    keyword: 'k' (
+        constant: 'kc',
+        declaration: 'kd',
+        namespace: 'kn',
+        pseudo: 'kp',
+        reserved: 'kr',
+        type: 'kt'
+    ),
+    literal: 'l' (
+        date: 'ld',
+        number: 'm' (
+            bin: 'mb',
+            float: 'mf',
+            hex: 'mh',
+            integer: 'mi' (
+                long: 'il'
+            ),
+            oct: 'mo',
+        ),
+        string: 's' (
+            affix: 'sa',
+            backtick: 'sb',
+            char: 'sc',
+            delimiter: 'dl',
+            doc: 'sd',
+            double: 's2',
+            escape: 'se',
+            heredoc: 'sh',
+            interpol: 'si',
+            other: 'sx',
+            regex: 'sr',
+            single: 's1',
+            symbol: 'ss',
+        ),
+    ),
+    name: 'n' (
+        attribute: 'na',
+        builtin: 'nb' (
+            pseudo: 'bp',
+        ),
+        class: 'nc',
+        constant: 'no',
+        decorator: 'nd',
+        entity: 'ni',
+        exception: 'ne',
+        function: 'nf' (
+            magic: 'fm'
+        ),
+        label: 'nl',
+        namespace: 'nn',
+        other: 'nx',
+        property: 'py',
+        tag: 'nt',
+        variable: 'nv' (
+            class: 'vc',
+            global: 'vg',
+            instance: 'vi',
+            magic: 'vm',
+        ),
+    ),
+    operator: 'o' (
+        word: 'ow',
+    ),
+    other: 'x',
+    punctuation: 'p',
+    text: null (
+        whitespace: 'w',
+    ),
+);
+
+@function highlight-map-deep-get($map, $keys...) {
+    $value: null;
+    @each $key in $keys {
+        $entry: map-get($map, $key);
+        @if $entry != null {
+            $value: if(type-of($entry) == list, nth($entry, 1), $entry);
+            $map: if(type-of($entry) == list and length($entry) > 1, nth($entry, 2), null) or ();
+        } @else {
+            @return null;
+        }
+    }
+    @return $value;
+}
+
+@function highlight-map-merge($parent-map, $child-map) {
+    $result: $parent-map;
+    @each $key, $value in $child-map {
+        $resultvalue: map-get($result, $key);
+        @if not map-has-key($result, $key) {
+            $result: map-merge($result, ($key: $value));
+        } @else {
+            $resultvalue1: if(type-of($resultvalue) == list, nth($resultvalue, 1), $resultvalue);
+            $value1: if(type-of($value) == list, nth($value, 1), $value) or $resultvalue1;
+            $resultmap: if(type-of($resultvalue) == list and length($resultvalue) > 1, nth($resultvalue, 2), null);
+            $valuemap: if(type-of($value) == list and length($value) > 1, nth($value, 2), null);
+            @if $resultmap and $valuemap {
+                $valuemap: highlight-map-merge($resultmap or (), $valuemap or ());
+            };
+            $result: map-merge($result, ($key: $value1 $valuemap));
+        }
+    }
+    @return $result;
+}
+
+@function to-dotted-string($list) {
+  $result: null;
+
+  @for $i from 1 through length($list) {
+    $e: nth($list, $i);
+    $result: if($i != length($list), "#{$result}#{$e}.", "#{$result}#{$e}");
+  }
+
+  @return $result;
+}
+
+
+@mixin highlight-rule($color: null, $bold: false, $italic: false, $underline: false, $bgcolor: null, $border: null) {
+    @if $color     { color: $color; }
+    @if $bold      { font-weight: bold; }
+    @if $italic    { font-style: italic; }
+    @if $underline { text-decoration: underline; }
+    @if $bgcolor   { background-color: $bgcolor; }
+    @if $border    { border: 1px solid $border; }
+}
+
+@mixin highlight-class($map, $values, $path: (), $parentvalue: null) {
+    @each $key, $value in $map {
+        $classname: nth($value, 1);
+        $fullpath: append($path, $key);
+        $styleargs: null;
+        @if $classname != null {
+            $styleargs: highlight-map-deep-get($values, $fullpath...) or $parentvalue or ();
+            @if $styleargs != null and length($styleargs) > 0 {
+                .#{$classname} {
+                    @include highlight-rule($styleargs...);
+                    /* #{to-dotted-string($fullpath)} */
+                }
+            }
+        }
+        @if length($value) > 1 {
+            // recursion to subelelements
+            @include highlight-class(nth($value, 2), $values, $fullpath, $styleargs);
+        };
+    };
+};
+
+/* Pygments / rouge source code highlight styles */
+#{$highlight-selector} {
+    @include highlight-class(
+        $highlight-style-classes,
+        highlight-map-merge($highlight-style-defaults, $highlight-style)
+    );
+};

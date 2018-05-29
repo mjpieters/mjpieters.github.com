@@ -4,10 +4,8 @@ category: plone
 title: Small change, big effect
 description: How changing one line halved the time it took to rename a Plone folder.
 tags : [performance, indexing, rename]
+date: 2007-11-04 12:00:00 +0100
 ---
-{% include JB/setup %}
-*This article was originally published on [jarn.com](http://jarn.com).*
-
 *{{ page.description }}*
 
 Here at the Plone Performance sprint, Matt Hamilton and Sasha Vincic are homing in on the Catalog and folder renaming. As Sasha already [reported earlier](http://valentinewebsystems.com/archive/2007/11/02/indexing-in-plone-got-twice-as-fast), they identified the object_provides index as a potential bottleneck.
@@ -16,10 +14,10 @@ Here at the Plone Performance sprint, Matt Hamilton and Sasha Vincic are homing 
 
 The index is filled with interface identifiers, strings representing the actual interfaces. The data for the index comes from a small method in Products.CMFPlone.CatalogTool, object_provides, which looked like this:
 
-{% highlight python %}
+```python
 def object_provides(object, portal, **kw):
     return [interfaceToName(portal, i) for i in providedBy(object).flattened()]
-{% endhighlight %}
+```
 
 So, for each interface declared by an object, interfaceToName is invoked. The purpose of interfaceToName is to provide a way to turn an
 interface to a string that can be used to later turn that string back
@@ -34,7 +32,10 @@ Luckily, for the object_provides index use-case, interfaceToName is overkill. Fi
 
 But more importantly, the index contents are never used to find the original interfaces again. Quite the contrary, it is only used to search what objects provide a given interface, and the developer querying the catalog will have to generate the same string format every time they search. So, with the index using interfaceToName to fill the index, searching the index also requires developers to use interfaceToName to query the index. Search for IATFolder? Pass in interfaceToName(IATFolder) and hit the same performance problem.
 
-![Renaming performance increase]({{BASE_PATH}}/assets/images/renaming-performance-increase.png){: .pull-right}
+{% include figure.html
+	image="/assets/images/renaming-performance-increase.png"
+	caption="Renaming performance increase"
+	position="right" %}
 
 ## Unique identifier
 
@@ -44,13 +45,14 @@ Of course, this means that if we use `__identifier__` then you should use the sa
 
 So we changed the indexing method to:
 
-{% highlight python %}
+```python
 def object_provides(object, portal, **kw):
     return [i.__identifier__ for i in providedBy(object).flattened()]
-{% endhighlight %}
+```
 
 and presto, indexing was more than twice as fast, as shown by the pretty graph on the right. We tested this by having JMeter rename a folder with 20 documents in it, 40 times.
 
 Not bad for a one-line change.
 
+*This article was originally published on [jarn.com](http://jarn.com).*
 

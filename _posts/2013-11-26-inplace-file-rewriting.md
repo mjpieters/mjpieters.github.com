@@ -5,19 +5,17 @@ title: Easy in-place file rewriting
 description: Using a context manager to allow painless rewriting of files
 tags : [in-place, contextmanager, file-io]
 ---
-{% include JB/setup %}
-
 *{{ page.description }}*
 
 Whenever you need to process a file in-place, transforming the contents and writing it out again in the same location, you can reach out for the [`fileinput` module](http://docs.python.org/2/library/fileinput.html) and use its `inplace` option:
 
-{% highlight python %}
+```python
 import fileinput
 
 for line in fileinput.input(somefilename, inplace=True):
     line = 'additional information ' + line.rstrip('\n')
     print line
-{% endhighlight %}
+```
 
 There are a few problems with the `fileinput` module, however. My biggest nitpick with the module is that it has an API that relies heavily on globals; `fileinput.input()` creates a global [`fileinput.FileInput()` object](http://docs.python.org/2/library/fileinput.html#fileinput.FileInput), which other functions in the module then access. You can of course ignore all that and reach straight for the `fileinput.FileInput()` constructor, but `fileinput.input()` is presented as the main API entrypoint.
 
@@ -27,7 +25,7 @@ Last, but not least, the [`fileinput` version in the Python 3 standard library](
 
 So I wrote my own replacement, using the excellent [`@contextlib.contextmanager` decorator](http://docs.python.org/2/library/contextlib.html#contextlib.contextmanager). This version works on both Python 2 and 3, relying on [`io.open()`](http://docs.python.org/2/library/io.html#io.open) to remain compatible between Python versions:
 
-{% highlight python %}
+```python
 from contextlib import contextmanager
 import io
 import os
@@ -96,13 +94,13 @@ def inplace(filename, mode='r', buffering=-1, encoding=None, errors=None,
             os.unlink(backupfilename)
         except os.error:
             pass
-{% endhighlight %}
+```
 
 This context manager deliberately focuses on just *one* file, and ignores `sys.stdin`, unlike the `fileinput` module. It is aimed squarly at just replacing a file in-place.
 
 Usage example, in Python 2, with the CSV module:
 
-{% highlight python %}
+```python
 import csv
 
 with inplace(csvfilename, 'rb') as (infh, outfh):
@@ -112,11 +110,11 @@ with inplace(csvfilename, 'rb') as (infh, outfh):
     for row in reader:
         row += ['new', 'columns']
         writer.writerow(row)
-{% endhighlight %}
+```
 
 and the Python 3 version:
 
-{% highlight python %}
+```python
 import csv
 
 with inplace(csvfilename, 'r', newline='') as (infh, outfh):
@@ -126,4 +124,4 @@ with inplace(csvfilename, 'r', newline='') as (infh, outfh):
     for row in reader:
         row += ['new', 'columns']
         writer.writerow(row)
-{% endhighlight %}
+```
