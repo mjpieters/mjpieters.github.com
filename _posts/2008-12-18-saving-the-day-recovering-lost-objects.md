@@ -1,10 +1,16 @@
 ---
+title: 'Saving the day: recovering lost objects'
+date: 2008-12-18 00:00:00 +00:00
+categories:
+- plone
+tags:
+- recovery
+- beforestorage
 layout: post
-category: plone
-title: "Saving the day: recovering lost objects"
-description: When a customer discovers over a week later that an important object was accidentially deleted, what do you do?
-tags : [recovery, beforestorage]
+description: When a customer discovers over a week later that an important object
+  was accidentially deleted, what do you do?
 ---
+
 *{{ page.description }}*
 
 ## Oh noes!

@@ -1,10 +1,16 @@
 ---
-layout: post
-category: python
 title: Easy in-place file rewriting
+date: 2013-11-26 00:00:00 +00:00
+categories:
+- python
+tags:
+- in-place
+- contextmanager
+- file-io
+layout: post
 description: Using a context manager to allow painless rewriting of files
-tags : [in-place, contextmanager, file-io]
 ---
+
 *{{ page.description }}*
 
 Whenever you need to process a file in-place, transforming the contents and writing it out again in the same location, you can reach out for the [`fileinput` module](http://docs.python.org/2/library/fileinput.html) and use its `inplace` option:

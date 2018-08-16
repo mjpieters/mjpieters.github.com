@@ -1,11 +1,17 @@
 ---
-layout: post
-category: plone
 title: One cookie please, but hold the pickles
+date: 2007-11-09 11:00:00 +00:00
+categories:
+- plone
+tags:
+- cookies
+- pickling
+- pickles
+- security
+layout: post
 description: The python pickle module is dangerous, didn't you know?
-tags : [cookies, pickling, pickles, security]
-date: 2007-11-09 12:00:00 +0100
 ---
+
 *{{ page.description }}*
 
 ## All your base are belong to us

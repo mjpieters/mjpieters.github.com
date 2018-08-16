@@ -1,10 +1,16 @@
 ---
-layout: post
-category: python
 title: Unicode in RTF documents
+date: 2012-06-06 00:00:00 +01:00
+categories:
+- python
+tags:
+- RTF
+- unicode
+- encoding
+layout: post
 description: How to encode unicode codepoints in RTF documents using PyRTF.
-tags : [RTF, unicode, encoding]
 ---
+
 *{{ page.description }}*
 
 Some time ago I had to output some nicely formatted reports from a web application, to be usable offline by Windows users. Naturally, I used the aging but still reliable [`PyRTF` module](https://pypi.python.org/pypi/PyRTF) to generate RTF documents with headers, tables, and a consistent style.

@@ -3,8 +3,8 @@ title: Martijn Pieters
 tagline: Invisible Framework Coding Ninja
 aside: true
 redirect_from:
-  - /tags.html
-  - /pages.html
+- "/tags.html"
+- "/pages.html"
 ---
 
 {% include figure.html

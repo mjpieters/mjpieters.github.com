@@ -1,10 +1,18 @@
 ---
-layout: post
-category: plone
 title: The dreaded plone.relations IntId KeyError
-description: When IntIds go missing, the going gets tough. Specifically, plone.app.relations and related packages do not deal gracefully when a relationship source or target is missing. Here is how we clear such broken relationships.
-tags : [plone.relations, IntIds, KeyError]
+date: 2011-06-29 00:00:00 +01:00
+categories:
+- plone
+tags:
+- plone.relations
+- IntIds
+- KeyError
+layout: post
+description: When IntIds go missing, the going gets tough. Specifically, plone.app.relations
+  and related packages do not deal gracefully when a relationship source or target
+  is missing. Here is how we clear such broken relationships.
 ---
+
 *{{ page.description }}*
 
 We've been experimenting with [plone.app.relations](http://pypi.python.org/pypi/plone.app.relations) to manage relationships between objects for a few years now. This package uses [zc.relations](http://pypi.python.org/pypi/zc.relationship) to lay the links between content items in your site, which in turn relies on [zope.app.intid](http://pypi.python.org/pypi/zope.app.intid) to indirectly create those links. Basically, intids are pointers to the real objects and lets you handle the linking efficiently.

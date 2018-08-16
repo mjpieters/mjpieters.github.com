@@ -1,26 +1,34 @@
+---
 title: Zopatista
+timezone: Europe/London
+collections:
+  posts:
+    title: Posts
+    output: true
+  uploads:
+    title: Uploads
+    output: true
+defaults:
+- scope:
+    path: "/google*.html"
+  values:
+    sitemap: false
+    indexing: false
 tagline: Invisible Framework Coding Ninja
 author: Martijn Pieters
 email: mj@zopatista.com
-description: >-
-    Martijn Pieters - Software Architect and Python mentor -
-url: "https://www.zopatista.com"
-
-# social media and integrations
+description: Martijn Pieters - Software Architect and Python mentor -
+url: https://www.zopatista.com
 twitter_username: zopatista
-github_username:  mjpieters
+github_username: mjpieters
 disqus: zopatista
-google_analytics: "UA-30217891-1"
-
-# theme configuration
+google_analytics: UA-30217891-1
 remote_theme: daviddarnes/alembic
-
 navigation_header:
-  Home: /
-  Blog: /blog/
-  Categories: /categories/
-  Search: /search/
-
+  Home: "/"
+  Blog: "/blog/"
+  Categories: "/categories/"
+  Search: "/search/"
 social_links:
   StackOverflow: https://stackoverflow.com/users/100297/martijn-pieters
   GitHub: https://github.com/zopatista
@@ -28,7 +36,6 @@ social_links:
   LinkedIn: https://www.linkedin.com/in/zopatista
   Keybase: https://keybase.io/zopatista
   Lastfm: https://www.last.fm/user/mjpieters
-
 sharing_links:
   Twitter: "#1DA1F2"
   facebook: "#3B5998"
@@ -36,48 +43,27 @@ sharing_links:
   LinkedIn: "#0077B5"
   Reddit: "#FF4500"
   Hacker News: "#ff6600"
-
 navigation_footer:
-  "Martijn Pieters": "/"
-
-# Defaults for various areas
-defaults:
-  -
-    scope:
-      path: /google*.html
-    values:
-      sitemap: false
-      indexing: false
-
-# jekyll-paginate
+  Martijn Pieters: "/"
 paginate: 3
 paginate_path: blog/page:num
-
-# jekyll-feed
 feed:
   path: atom.xml
-
-# Jekyll
 encoding: utf-8
 lang: en-GB
-timezone: Europe/London
-permalink: /:categories/:year/:month/:day/:title/
-
+permalink: "/:categories/:year/:month/:day/:title/"
 markdown: kramdown
-
 plugins:
-  - jekyll-default-layout
-  - jekyll-feed
-  - jekyll-sitemap
-  - jekyll-redirect-from
-
+- jekyll-default-layout
+- jekyll-feed
+- jekyll-sitemap
+- jekyll-redirect-from
 exclude:
-  - README.md
-  - CNAME
-  - Gemfile
-  - Gemfile.lock
-  - .bundle
-  - .git
-  - .gitignore
-  - .vendor
-
+- README.md
+- CNAME
+- Gemfile
+- Gemfile.lock
+- ".bundle"
+- ".git"
+- ".gitignore"
+- ".vendor"

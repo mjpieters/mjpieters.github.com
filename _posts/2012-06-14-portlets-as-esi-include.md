@@ -1,12 +1,18 @@
 ---
-layout: post
-category: plone
 title: Portlets as ESI include
+date: 2012-06-14 00:00:00 +01:00
+categories:
+- plone
+tags:
+- ESI
+- caching
+- portlets
+layout: post
 description: Using ESI includes to cache Plone portlets separately.
-tags : [ESI, caching, portlets]
 redirect_from:
-  - /plone/2012/06/09/portlets-as-esi-include/
+- "/plone/2012/06/09/portlets-as-esi-include/"
 ---
+
 *{{ page.description }}*
 
 To help with making a large and busy intranet website perform better, we've used a light sprinkling of [ESI](https://en.wikipedia.org/wiki/Edge_Side_Includes) (via [Varnish's ESI support](https://www.varnish-cache.org/trac/wiki/ESIfeatures)) to improve the cacheabilibty of pages in the site. By delegating assembly of parts of the page to the Varnish cache, pages become much more cacheable as frequently changing chunks such as the personal bar at the top are requested separately.

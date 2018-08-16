@@ -1,12 +1,19 @@
 ---
-layout: post
-category: python
 title: Cross-Python metaclasses
-description: Using a class decorator for applying a metaclass in both Python 2 and 3
-tags : [metaclass, decorator, python-2-and-3]
+date: 2014-03-14 00:00:00 +00:00
+categories:
+- python
+tags:
+- metaclass
+- decorator
+- python-2-and-3
+layout: post
+description: Using a class decorator for applying a metaclass in both Python 2 and
+  3
 redirect_from:
-    - /python/2014/04/14/cross-python-metaclasses/
+- "/python/2014/04/14/cross-python-metaclasses/"
 ---
+
 *{{ page.description }}*
 
 When you want to create a class including a metaclass, making it compatible with both Python 2 and 3 can be a little tricky. 
