@@ -1,6 +1,6 @@
 ---
+permalink: "/"
 layout: single
-permalink: /
 redirect_from:
 - "/tags.html"
 - "/pages.html"

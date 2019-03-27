@@ -1,152 +1,152 @@
 ---
-# theme
-remote_theme             : "mmistakes/minimal-mistakes@4.15.2"
-minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
-
-# Site Settings
-locale                   : "en-GB"
-title                    : "Zopatista"
-title_separator          : "-"
-name                     : "Martijn Pieters"
-description              : "Software Architect and Python mentor"
-url                      : "https://www.zopatista.com"
-baseurl                  : # the subpath of your site, e.g. "/blog"
-repository               : "mjpieters/mjpieters.github.com"
-teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
-logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
-masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
-
-
-# breadcrumbs            : false # true, false (default)
-words_per_minute         : 200
+title: Zopatista
+timezone: Europe/London
+collections:
+  posts:
+    title: Posts
+    output: true
+  uploads:
+    title: Uploads
+    output: true
+defaults:
+- scope:
+    path: ''
+    type: pages
+  values:
+    layout: single
+    author_profile: true
+- scope:
+    path: ''
+    type: posts
+  values:
+    layout: single
+    author_profile: true
+    read_time: true
+    comments: 
+    share: true
+    related: true
+remote_theme: mmistakes/minimal-mistakes@4.15.2
+minimal_mistakes_skin: default
+locale: en-GB
+title_separator: "-"
+name: Martijn Pieters
+description: Software Architect and Python mentor
+url: https://www.zopatista.com
+baseurl: 
+repository: mjpieters/mjpieters.github.com
+teaser: 
+logo: 
+masthead_title: 
+words_per_minute: 200
 comments:
-  provider               : "disqus" # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "custom"
+  provider: disqus
   disqus:
-    shortname            : "zopatista" # https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-
+    shortname: zopatista
 atom_feed:
-  path                   : "/atom.xml" # blank (default) uses feed.xml
-search                   : true # true, false (default)
-search_full_content      : # true, false (default)
-search_provider          : # lunr (default), algolia, google
-# SEO Related
-google_site_verification : "5C1zKRO9jFlOWxjE2vzONtXUMr1by47YM7XhzDv9foU"
-bing_site_verification   :
-yandex_site_verification :
-naver_site_verification  :
-
-# Social Sharing
+  path: "/atom.xml"
+search: true
+search_full_content: 
+search_provider: 
+google_site_verification: 5C1zKRO9jFlOWxjE2vzONtXUMr1by47YM7XhzDv9foU
+bing_site_verification: 
+yandex_site_verification: 
+naver_site_verification: 
 twitter:
-  username               : zopatista
+  username: zopatista
 facebook:
-  username               : zopatista
-  app_id                 :
-  publisher              :
-og_image                 : # Open Graph/Twitter default site image
-# For specifying social profiles
-# - https://developers.google.com/structured-data/customize/social-profiles
+  username: zopatista
+  app_id: 
+  publisher: 
+og_image: 
 social:
-  type                   : # Person or Organization (defaults to Person)
-  name                   : # If the user or organization name differs from the site's name
-  links: # An array of links to social media profiles
-    - "https://stackoverflow.com/users/100297/martijn-pieters"
-    - "https://github.com/zopatista"
-    - "https://twitter.com/zopatista"
-    - "https://www.linkedin.com/in/zopatista"
-    - "https://keybase.io/zopatista"
-    - "https://www.last.fm/user/mjpieters"
-    - "https://www.instagram.com/zopatista/"
-    - "https://facebook.com/zopatista"
-# Analytics
-analytics:
-  provider               : "google" # false (default), "google", "google-universal", "custom"
-  google:
-    tracking_id          : UA-30217891-1
-    anonymize_ip         : # true, false (default)
-
-
-# Site Author
-author:
-  name             : "Martijn Pieters"
-  avatar           : "assets/images/mugshot.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Software Architect and Python mentor"
-  location         : "Cambridge"
-  email            : 
+  type: 
+  name: 
   links:
-    - label: "Stack Overflow"
-      icon: "fab fa-fw fa-stack-overflow"
-      url: https://stackoverflow.com/users/100297/martijn-pieters
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github-square"
-      url: "https://github.com/zopatista"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/zopatista"
-    - label: "LinkedIn"
-      icon: "fab fa-fw fa-linkedin"
-      url: "https://twitter.com/zopatista"
-    - label: "Keybase"
-      icon: "fab fa-fw fa-keybase"
-      url: "https://keybase.io/zopatista"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/zopatista"
-    - label: "Last.fm"
-      icon: "fab fa-fw fa-lastfm-square"
-      url: "https://www.last.fm/user/mjpieters"
-
-# Site Footer
+  - https://stackoverflow.com/users/100297/martijn-pieters
+  - https://github.com/zopatista
+  - https://twitter.com/zopatista
+  - https://www.linkedin.com/in/zopatista
+  - https://keybase.io/zopatista
+  - https://www.last.fm/user/mjpieters
+  - https://www.instagram.com/zopatista/
+  - https://facebook.com/zopatista
+analytics:
+  provider: google
+  google:
+    tracking_id: UA-30217891-1
+    anonymize_ip: 
+author:
+  name: Martijn Pieters
+  avatar: assets/images/mugshot.jpg
+  bio: Software Architect and Python mentor
+  location: Cambridge
+  email: 
+  links:
+  - label: Stack Overflow
+    icon: fab fa-fw fa-stack-overflow
+    url: https://stackoverflow.com/users/100297/martijn-pieters
+  - label: GitHub
+    icon: fab fa-fw fa-github-square
+    url: https://github.com/zopatista
+  - label: Twitter
+    icon: fab fa-fw fa-twitter-square
+    url: https://twitter.com/zopatista
+  - label: LinkedIn
+    icon: fab fa-fw fa-linkedin
+    url: https://twitter.com/zopatista
+  - label: Keybase
+    icon: fab fa-fw fa-keybase
+    url: https://keybase.io/zopatista
+  - label: Instagram
+    icon: fab fa-fw fa-instagram
+    url: https://instagram.com/zopatista
+  - label: Last.fm
+    icon: fab fa-fw fa-lastfm-square
+    url: https://www.last.fm/user/mjpieters
 footer:
   links:
-    - label: "Stack Overflow"
-      icon: "fab fa-fw fa-stack-overflow"
-      url: https://stackoverflow.com/users/100297/martijn-pieters
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/zopatista"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/zopatista"
-    - label: "LinkedIn"
-      icon: "fab fa-fw fa-linkedin"
-      url: "https://twitter.com/zopatista"
-    - label: "Keybase"
-      icon: "fab fa-fw fa-keybase"
-      url: "https://keybase.io/zopatista"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/zopatista"
-    - label: "Last.fm"
-      icon: "fab fa-fw fa-lastfm-square"
-      url: "https://www.last.fm/user/mjpieters"
-
-# Reading Files
+  - label: Stack Overflow
+    icon: fab fa-fw fa-stack-overflow
+    url: https://stackoverflow.com/users/100297/martijn-pieters
+  - label: GitHub
+    icon: fab fa-fw fa-github
+    url: https://github.com/zopatista
+  - label: Twitter
+    icon: fab fa-fw fa-twitter-square
+    url: https://twitter.com/zopatista
+  - label: LinkedIn
+    icon: fab fa-fw fa-linkedin
+    url: https://twitter.com/zopatista
+  - label: Keybase
+    icon: fab fa-fw fa-keybase
+    url: https://keybase.io/zopatista
+  - label: Instagram
+    icon: fab fa-fw fa-instagram
+    url: https://instagram.com/zopatista
+  - label: Last.fm
+    icon: fab fa-fw fa-lastfm-square
+    url: https://www.last.fm/user/mjpieters
 include:
-  - _pages
+- _pages
 exclude:
-  - README.md
-  - CNAME
-  - Gemfile
-  - Gemfile.lock
-  - ".bundle"
-  - ".git"
-  - ".gitignore"
-  - ".vendor"
-  - "*.sublime-project"
-  - "*.sublime-workspace"
-  - .jekyll-assets-cache
-  - .sass-cache
-encoding: "utf-8"
-markdown_ext: "markdown,mkdown,mkdn,mkd,md"
-
-
-# Conversion
+- README.md
+- CNAME
+- Gemfile
+- Gemfile.lock
+- ".bundle"
+- ".git"
+- ".gitignore"
+- ".vendor"
+- "*.sublime-project"
+- "*.sublime-workspace"
+- ".jekyll-assets-cache"
+- ".sass-cache"
+encoding: utf-8
+markdown_ext: markdown,mkdown,mkdn,mkd,md
 markdown: kramdown
 highlighter: rouge
 lsi: false
 excerpt_separator: "\n\n"
-
-
-# Markdown Processing
 kramdown:
   input: GFM
   hard_wrap: false
@@ -156,121 +156,35 @@ kramdown:
   toc_levels: 1..6
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   enable_coderay: false
-
-
-# Sass/SCSS
 sass:
   sass_dir: _sass
-  style: compressed # http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
-
-
-# Outputting
+  style: compressed
 permalink: "/:categories/:year/:month/:day/:title/"
-paginate: 5 # amount of posts to show
-paginate_path: /page:num/
-timezone: Europe/London # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-
-
-# Plugins (previously gems:)
+paginate: 5
+paginate_path: "/page:num/"
 plugins:
-  # not listing the defaults, see https://help.github.com/en/articles/configuring-jekyll-plugins
-  - jekyll-sitemap
-  - jekyll-feed
-  - jemoji
-  - jekyll-include-cache
-  - jekyll-redirect-from
-
-# mimic GitHub Pages with --safe
+- jekyll-sitemap
+- jekyll-feed
+- jemoji
+- jekyll-include-cache
+- jekyll-redirect-from
 whitelist:
-  - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll-gist
-  - jekyll-feed
-  - jemoji
-  - jekyll-include-cache
-  - jekyll-redirect-from
-
-
-# Archives
-#  Type
-#  - GitHub Pages compatible archive pages built with Liquid ~> type: liquid (default)
-#  - Jekyll Archives plugin archive pages ~> type: jekyll-archives
-#  Path (examples)
-#  - Archive page should exist at path when using Liquid method or you can
-#    expect broken links (especially with breadcrumbs enabled)
-#  - <base_path>/tags/my-awesome-tag/index.html ~> path: /tags/
-#  - <base_path/categories/my-awesome-category/index.html ~> path: /categories/
-#  - <base_path/my-awesome-category/index.html ~> path: /
+- jekyll-paginate
+- jekyll-sitemap
+- jekyll-gist
+- jekyll-feed
+- jemoji
+- jekyll-include-cache
+- jekyll-redirect-from
 category_archive:
   type: liquid
-  path: /categories/
+  path: "/categories/"
 tag_archive:
   type: liquid
-  path: /tags/
-# https://github.com/jekyll/jekyll-archives
-# jekyll-archives:
-#   enabled:
-#     - categories
-#     - tags
-#   layouts:
-#     category: archive-taxonomy
-#     tag: archive-taxonomy
-#   permalinks:
-#     category: /categories/:name/
-#     tag: /tags/:name/
-
-
-# HTML Compression
-# - http://jch.penibelst.de/
+  path: "/tags/"
 compress_html:
   clippings: all
   ignore:
     envs: development
-
-# Collections
-collections:
-  posts:
-    title: Posts
-    output: true
-
-# Defaults
-defaults:
-  # _pages
-  - scope:
-      path: ""
-      type: pages
-    values:
-      layout: single
-      author_profile: true
-
-  # _posts
-  - scope:
-      path: ""
-      type: posts
-    values:
-      layout: single
-      author_profile: true
-      read_time: true
-      comments: # true
-      share: true
-      related: true
-
-# jekyll-feed configuration
 feed:
   path: atom.xml
-
-# Before
-# collections:
-#   posts:
-#     title: Posts
-#     output: true
-#   uploads:
-#     title: Uploads
-#     output: true
-# navigation_header:
-#   Home: "/"
-#   Blog: "/blog/"
-#   Categories: "/categories/"
-#   Search: "/search/"
-# paginate: 3
-# paginate_path: blog/page:num
