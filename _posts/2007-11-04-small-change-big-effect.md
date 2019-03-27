@@ -7,7 +7,6 @@ tags:
 - performance
 - indexing
 - rename
-layout: post
 description: How changing one line halved the time it took to rename a Plone folder.
 ---
 
@@ -37,10 +36,7 @@ Luckily, for the object_provides index use-case, interfaceToName is overkill. Fi
 
 But more importantly, the index contents are never used to find the original interfaces again. Quite the contrary, it is only used to search what objects provide a given interface, and the developer querying the catalog will have to generate the same string format every time they search. So, with the index using interfaceToName to fill the index, searching the index also requires developers to use interfaceToName to query the index. Search for IATFolder? Pass in interfaceToName(IATFolder) and hit the same performance problem.
 
-{% include figure.html
-	image="/assets/images/renaming-performance-increase.png"
-	caption="Renaming performance increase"
-	position="right" %}
+![Renaming performance increase](/assets/images/renaming-performance-increase.png){: .align-right}
 
 ## Unique identifier
 

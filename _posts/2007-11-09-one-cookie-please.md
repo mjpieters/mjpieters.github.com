@@ -8,7 +8,6 @@ tags:
 - pickling
 - pickles
 - security
-layout: post
 description: The python pickle module is dangerous, didn't you know?
 ---
 

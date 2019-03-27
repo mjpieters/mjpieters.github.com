@@ -7,7 +7,6 @@ tags:
 - in-place
 - contextmanager
 - file-io
-layout: post
 description: Using a context manager to allow painless rewriting of files
 ---
 

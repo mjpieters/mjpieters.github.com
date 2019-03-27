@@ -7,7 +7,6 @@ tags:
 - plone.relations
 - IntIds
 - KeyError
-layout: post
 description: When IntIds go missing, the going gets tough. Specifically, plone.app.relations
   and related packages do not deal gracefully when a relationship source or target
   is missing. Here is how we clear such broken relationships.

@@ -7,7 +7,6 @@ tags:
 - ESI
 - caching
 - portlets
-layout: post
 description: Using ESI includes to cache Plone portlets separately.
 redirect_from:
 - "/plone/2012/06/09/portlets-as-esi-include/"

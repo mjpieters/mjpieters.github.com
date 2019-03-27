@@ -6,7 +6,6 @@ categories:
 tags:
 - recovery
 - beforestorage
-layout: post
 description: When a customer discovers over a week later that an important object
   was accidentially deleted, what do you do?
 ---

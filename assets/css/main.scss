@@ -1,13 +1,15 @@
 ---
-title: 'false'
-styles: true
+# Only the main Sass file needs front matter (the dashes are enough)
 ---
 
-@import "alembic";
+@charset "utf-8";
+
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
+@import "minimal-mistakes"; // main partials
 
 // the Stack Exchange flair is built around the content-box model
 // and doesn't reset the line-height.
-.se-flair, .se-flair * { 
+.se-flair, .se-flair * {
 	box-sizing: content-box;
 	line-height: 14.4px;
 }
@@ -15,7 +17,7 @@ styles: true
 // A citation entry in a blockquote is the attribution
 blockquote {
 	cite {
-	    @include fontsize(theta, all);
+	    font-size: $type-size-7;
 		&::before {
 			content: '\2014 \00A0';
 		}
