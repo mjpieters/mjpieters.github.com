@@ -1,10 +1,10 @@
 ---
+title: Martijn Pieters — Software Architect and Python mentor
 permalink: "/"
-layout: single
 redirect_from:
-- "/tags.html"
 - "/pages.html"
 - "/search/"
+layout: single
 ---
 
 Software architect, Python mentor & Consultant with a long history in serious web applications and content management.
