@@ -1,8 +1,7 @@
 ---
 permalink: "/blog/"
-layout: posts
+layout: archive
 collection: posts
 redirect_from:
 - "/archive.html"
 ---
-
