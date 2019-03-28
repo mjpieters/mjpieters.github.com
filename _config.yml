@@ -63,7 +63,7 @@ social:
   name: 
   links:
   - https://stackoverflow.com/users/100297/martijn-pieters
-  - https://github.com/zopatista
+  - https://github.com/mjpieters
   - https://twitter.com/zopatista
   - https://www.linkedin.com/in/zopatista
   - https://keybase.io/zopatista
@@ -87,7 +87,7 @@ author:
     url: https://stackoverflow.com/users/100297/martijn-pieters
   - label: GitHub
     icon: fab fa-fw fa-github-square
-    url: https://github.com/zopatista
+    url: https://github.com/mjpieters
   - label: Twitter
     icon: fab fa-fw fa-twitter-square
     url: https://twitter.com/zopatista
@@ -110,7 +110,7 @@ footer:
     url: https://stackoverflow.com/users/100297/martijn-pieters
   - label: GitHub
     icon: fab fa-fw fa-github
-    url: https://github.com/zopatista
+    url: https://github.com/mjpieters
   - label: Twitter
     icon: fab fa-fw fa-twitter-square
     url: https://twitter.com/zopatista
