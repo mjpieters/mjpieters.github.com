@@ -1,7 +1,9 @@
 ---
 title: Posts by Category
 permalink: "/categories/"
-layout: categories
 author_profile: true
+redirect_from:
+- "/tags.html"
+layout: categories
 ---
 
