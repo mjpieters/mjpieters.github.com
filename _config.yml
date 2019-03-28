@@ -22,7 +22,7 @@ defaults:
     layout: single
     author_profile: true
     read_time: true
-    comments: 
+    comments: true
     share: true
     related: true
 remote_theme: mmistakes/minimal-mistakes@4.15.2
