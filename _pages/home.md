@@ -9,8 +9,7 @@ layout: single
 
 Software architect, Python mentor & Consultant with a long history in serious web applications and content management.
 
-I'm available as a mentor and freelancer via Codementor. Book me for one-on-one sessions or long term projects:
-[![Get help on Codementor](https://cdn.codementor.io/badges/get_help_github.svg)](https://www.codementor.io/mjpieters)
+I'm available as a [mentor and freelancer via Codementor](https://www.codementor.io/mjpieters). [Book me](https://hire.codementor.io?referral=mjpieters-1vw2ujpf3q) for one-on-one sessions, freelance tasks or code reviews. 
 
-[![](https://assets.codementor.io/cmx-dev-badge.svg)](https://www.codementor.io/freelance-developers/python?utm_source=certified_badge&referral=mjpieters-1vw2ujpf3q)
-Have a Python project you need implementing? Hire me through Codementor X.
+[![](https://assets.codementor.io/cmx-dev-badge.svg)](https://www.codementor.io/freelance-developers/python?utm_source=certified_badge&referral=mjpieters-1vw2ujpf3q){.align-left}
+Have a larger Python project you need implementing? Then [hire me through Codementor X](https://www.codementor.io/freelance-developers/python?utm_source=certified_badge&referral=mjpieters-1vw2ujpf3q).
