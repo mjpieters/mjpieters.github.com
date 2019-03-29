@@ -24,6 +24,7 @@ for your project? Send me a message and I'll respond as soon as possible.
     id="contact_message" required="required"
     name="message"></textarea></label>
   <input type="hidden" name="_gotcha">
+  <input type="hidden" id="captchaResponse" name="g-recaptcha-response">
   <button type="submit">Send Message</button>
 </form>
 
