@@ -97,7 +97,6 @@
         external.click(function(e) {
             var url = $(this).attr('href'),
                 newtab = window.navigator.platform.startsWith('Mac') ? e.metaKey : e.ctrlKey;
-            console.log(newtab);
             e.preventDefault();
             gtag('event', 'click', {
                 'event_category': 'outbound',
