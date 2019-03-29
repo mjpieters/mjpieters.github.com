@@ -43,6 +43,7 @@
                     });
                     selector = success_selector;
                     close_callback = function() {
+                        form.find('input:text,input[type="email"],textarea').val('');
                         document.location.reload();
                     }
                 } else {
