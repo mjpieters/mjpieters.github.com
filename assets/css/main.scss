@@ -22,3 +22,25 @@ blockquote {
 		}
 	}
 }
+
+// Form dialogs
+
+.form-dialog {
+  // undo the blockquote styling we use to build these
+  font-style: inherit;
+  border-left: none;
+  // magnific-popup inline styling
+  position: relative;
+  padding: 2em;
+  width: auto;
+  max-width: 500px;
+  margin: 0 auto !important;
+
+  .mfp-close {
+  	color: $muted-text-color;
+  }
+
+  h3:first-child {
+  	margin-top: 0em;
+  }
+}
