@@ -71,10 +71,10 @@ social:
   - https://www.instagram.com/zopatista/
   - https://www.codementor.io/mjpieters
 analytics:
-  provider: google
+  provider: google-gtag
   google:
     tracking_id: UA-30217891-1
-    anonymize_ip: 
+    anonymize_ip: false
 author:
   name: Martijn Pieters
   avatar: assets/images/mugshot.jpg
