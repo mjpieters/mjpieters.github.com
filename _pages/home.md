@@ -1,5 +1,5 @@
 ---
-title: Software Architect and Python mentor
+title: Martijn Pieters -- Software Architect and Python mentor
 permalink: "/"
 redirect_from:
 - "/pages.html"

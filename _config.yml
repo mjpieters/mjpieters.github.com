@@ -1,5 +1,5 @@
 ---
-title: Zopatista
+title: Zopatista -- Martijn Pieters
 timezone: Europe/London
 collections:
   posts:
@@ -57,7 +57,7 @@ facebook:
   username: zopatista
   app_id: 
   publisher: 
-og_image: 
+og_image: assets/images/mugshot.jpg
 social:
   type: 
   name: 
