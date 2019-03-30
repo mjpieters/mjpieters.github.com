@@ -95,17 +95,18 @@
             external = $('a[href]').filter(function() { return this.hostname != hostname });
 
         external.click(function(e) {
+            // Record outbound links as events, but only if it'll update this window.
+            // detection based on https://github.com/googleanalytics/autotrack/blob/master/lib/plugins/outbound-link-tracker.js
             var url = $(this).attr('href'),
-                newtab = window.navigator.platform.startsWith('Mac') ? e.metaKey : e.ctrlKey;
-            e.preventDefault();
+                newtab = $(this).attr('target') === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.which > 1,
+                callback = newtab ? function() {} : function() { document.location = url; };
+            if (!newtab) { e.preventDefault(); }
+            window.setTimeout(callback, 1000);
             gtag('event', 'click', {
                 'event_category': 'outbound',
                 'event_label': url,
                 'transport_type': 'beacon',
-                'event_callback': function() {
-                    if (newtab) { window.open(url); }
-                    else { document.location = url; }
-                }
+                'event_callback': callback,
             });
         });
     });
