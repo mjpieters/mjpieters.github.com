@@ -1,8 +1,8 @@
 (function($, window, document) {
     $(function() {
-        var gtag = window.gtag || function(command, action, config) { 
+        var gtag = window.gtag || function(command, action, params) {
             console.log('gtag()', arguments);
-            if (command == 'event' && 'event_callback' in config) {
+            if (command == 'event' && 'event_callback' in params) {
                 config['event_callback']();
             }
         };
@@ -23,6 +23,7 @@
 
                 var form = $(this),
                     href = form.attr("action"),
+                    email = form.find('#contact_email').val() || '<no email set>',
                     success_selector = form.data("success"),
                     error_selector = form.data("error"),
                     error_text = $(form.data("error-text")),
@@ -30,7 +31,7 @@
 
                 gtag('event', 'submit', {
                     'event_category': 'contact',
-                    'event_label': 'Visitor submitted the contact form'
+                    'event_label': email
                 });
 
                 $.ajax({
@@ -41,52 +42,85 @@
                 })
 
                 .done(function(response) {
-                    var selector, close_callback = null;
+                    var selector,
+                        close_callback = null,
+                        gtag_event_sent = false,
+                        gtag_action = 'successful';
+
                     magnificPopup.close();
+
                     if (response.status == "success") {
-                        gtag('event', 'successful', {
-                            'event_category': 'contact',
-                            'event_label': 'Contact form successfully sent'
-                        });
                         selector = success_selector;
                         close_callback = function() {
-                            form.find('input:text,input[type="email"],textarea').val('');
-                            document.location.reload();
+                            if (!gtag_event_sent) {
+                                // wait another 100ms before actually closing
+                                gtag_event_sent = true;
+                                window.setTimeout(close_callback, 100);
+                            }
+                            document.location = '/';
                         }
                     } else {
-                        gtag('event', 'error', {
-                            'event_category': 'contact',
-                            'event_label': 'Contact form error response'
-                        });
+                        gtag_action = 'error'
                         selector = error_selector;
+                        close_callback = function() {
+                            if (!gtag_event_sent) {
+                                // wait another 100ms before actually closing
+                                gtag_event_sent = true;
+                                window.setTimeout(close_callback, 100);
+                            }
+                            document.location.reload();
+                        }
                         error_text.text(response.message);
+                        gtag('event', 'exception', {
+                            description: `Contact form submission error: ${JSON.stringify(response)}`,
+                            fatal: false,
+                        });
                     }
+                    gtag('event', gtag_action, {
+                        'event_category': 'contact',
+                        'event_label': email,
+                        'event_callback': function() { gtag_event_sent = true; },
+                    });
                     magnificPopup.open({
                         type: 'inline',
-                        items: {
-                            src: selector
-                        },
-                        callbacks: {
-                            close: close_callback
-                        },
+                        items: { src: selector },
+                        callbacks: { close: close_callback },
                     }, 0);
                 })
 
                 .fail(function(xhr, status, error) {
+                    var error_message = `(${xhr.status}) ${status} ${error}`,
+                        gtag_event_sent = false,
+                        close_callback;
+
                     magnificPopup.close();
+
                     gtag('event', 'fail', {
                         'event_category': 'contact',
-                        'event_label': 'Contact form AJAX failure'
+                        'event_label': email,
+                        'event_callback': function() { gtag_event_sent = true; },
                     });
-                    error_text.text(`(${xhr.status}) {status} {error}`);
+                    gtag('event', 'exception', {
+                        description: `Contact form submission failure: ${error_message}`,
+                        fatal: true,
+                    });
+
+                    close_callback = function() {
+                        if (!gtag_event_sent) {
+                            // wait another 100ms before actually closing
+                            gtag_event_sent = true;
+                            window.setTimeout(close_callback, 100);
+                        }
+                        document.location.reload();
+                    }
+
+                    error_text.text(error_message);
                     magnificPopup.open({
                         type: 'inline',
-                        items: {
-                            src: error_selector
-                        },
+                        items: { src: error_selector },
+                        callbacks: { close: close_callback }
                     }, 0);
                 });
-
             });
         }
 

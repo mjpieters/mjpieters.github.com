@@ -141,6 +141,7 @@ exclude:
 - "*.sublime-workspace"
 - ".jekyll-assets-cache"
 - ".sass-cache"
+- _utilities
 encoding: utf-8
 markdown_ext: markdown,mkdown,mkdn,mkd,md
 markdown: kramdown
