@@ -8,7 +8,8 @@ tags:
 - interview
 - stackoverflow
 read_time: false
-description: Listen to an interview with me on the Talk Python to Me podcast on the subject of Stack Overflow and, of course, Python.
+description: Listen to an interview with me on the Talk Python to Me podcast on the
+  subject of Stack Overflow and, of course, Python.
 ---
 
 I was interviewed for the excellent [*Talk Python to Me* podcast](https://talkpython.fm/), in [Episode #86](https://talkpython.fm/episodes/show/86/python-at-stackoverflow) on the subject of Stack Overflow, Python, and my connection to both!
