@@ -40,5 +40,5 @@ $ bundle exec jekyll serve --watch
 
 I am using [Minimal Mistakes](https://github.com/mmistakes/minimal-mistakes) as the theme.
 
-* The style is customised purely in `_config.yml`, with only `_layouts/default.html` customised to add the contactform script tag below the style scripts.
-* The jekyll-redirect-to redirect.html layout was customised to add Google analytics.
+* The style is customised purely in `_config.yml`.
+* The jekyll-redirect-to `redirect.html` layout was customised to add Google analytics.
