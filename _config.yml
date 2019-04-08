@@ -93,7 +93,7 @@ author:
     url: https://twitter.com/zopatista
   - label: LinkedIn
     icon: fab fa-fw fa-linkedin
-    url: http://linkedin.com/in/zopatista
+    url: https://www.linkedin.com/in/zopatista
   - label: Keybase
     icon: fab fa-fw fa-keybase
     url: https://keybase.io/zopatista
@@ -116,7 +116,7 @@ footer:
     url: https://twitter.com/zopatista
   - label: LinkedIn
     icon: fab fa-fw fa-linkedin
-    url: http://linkedin.com/in/zopatista
+    url: https://www.linkedin.com/in/zopatista
 include:
 - _pages
 exclude:
