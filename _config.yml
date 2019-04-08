@@ -117,15 +117,6 @@ footer:
   - label: LinkedIn
     icon: fab fa-fw fa-linkedin
     url: http://linkedin.com/in/zopatista
-  - label: Keybase
-    icon: fab fa-fw fa-keybase
-    url: https://keybase.io/zopatista
-  - label: Instagram
-    icon: fab fa-fw fa-instagram
-    url: https://instagram.com/zopatista
-  - label: Last.fm
-    icon: fab fa-fw fa-lastfm-square
-    url: https://www.last.fm/user/mjpieters
 include:
 - _pages
 exclude:
