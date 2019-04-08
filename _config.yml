@@ -124,6 +124,7 @@ exclude:
 - CNAME
 - Gemfile
 - Gemfile.lock
+- Rakefile
 - ".bundle"
 - ".git"
 - ".gitignore"
