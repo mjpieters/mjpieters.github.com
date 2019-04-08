@@ -25,7 +25,7 @@ defaults:
     comments: true
     share: true
     related: true
-remote_theme: mmistakes/minimal-mistakes@4.15.2
+remote_theme: mmistakes/minimal-mistakes@after-footer-scripts
 minimal_mistakes_skin: default
 locale: en-GB
 title_separator: "-"
@@ -183,3 +183,5 @@ feed:
   path: atom.xml
 head_scripts:
 - https://www.google.com/recaptcha/api.js?render=6LfT7JoUAAAAAOJeXkJp-_YhnKEvnz3DhEM-ni2n
+after_footer_scripts:
+  - /assets/js/zopatista.js
