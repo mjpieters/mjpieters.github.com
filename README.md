@@ -42,3 +42,11 @@ I am using [Minimal Mistakes](https://github.com/mmistakes/minimal-mistakes) as 
 
 * The style is customised purely in `_config.yml`.
 * The jekyll-redirect-to `redirect.html` layout was customised to add Google analytics.
+
+## Link integrity checking
+
+I've set up htmlproofer to check for link rot, run periodically with:
+
+```shell
+$ bundle exec jekyll build && bundle exec htmlproofer ./_site
+```
