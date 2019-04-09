@@ -25,7 +25,7 @@ defaults:
     comments: true
     share: true
     related: true
-remote_theme: mmistakes/minimal-mistakes@after-footer-scripts
+remote_theme: mmistakes/minimal-mistakes@d06e437
 minimal_mistakes_skin: default
 locale: en-GB
 title_separator: "-"
