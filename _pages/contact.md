@@ -43,5 +43,5 @@ for your project? Send me a message and I'll respond as soon as possible.
 >
 > *error*{: #error-message}  
 >
-> Please close this dialog and try again.
+> Please close this dialog and try submitting again.
 {: error}

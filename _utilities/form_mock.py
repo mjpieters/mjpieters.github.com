@@ -14,10 +14,24 @@ from pprint import pformat
 app = Flask(__name__)
 
 
+@app.after_request
+def add_cors_headers(response):
+    # formcarry.com CORS policy
+    response.headers.extend({
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": 
+            "DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,"
+            "If-Modified-Since,Cache-Control,Content-Type",
+        "Access-Control-Max-Age": "1728000",
+    })
+    return response
+
+
 def handle_form(response):
     print("Received:", pformat(request.form.to_dict()))
     resp = jsonify(response)
-    resp.headers.add("Access-Control-Allow-Origin", "*")
     return resp
 
 
@@ -46,4 +60,4 @@ def reject():
 @app.route("/error", methods=["POST"])
 def error():
     handle_form({})
-    return "Not a valid request, forbidden", 405, {"Access-Control-Allow-Origin": "*"}
+    return "Not a valid request, forbidden", 405

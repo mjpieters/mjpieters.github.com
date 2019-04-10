@@ -3,20 +3,22 @@
         var gtag = window.gtag || function(command, action, params) {
             console.log('gtag()', arguments);
             if (command == 'event' && 'event_callback' in params) {
-                config['event_callback']();
+                params['event_callback']();
             }
         };
 
         // Contact form handling
         if ($(".contactForm").length) {
-            grecaptcha.ready(function() {
-                grecaptcha.execute("6LfT7JoUAAAAAOJeXkJp-_YhnKEvnz3DhEM-ni2n", {
-                    action: "contactform"
-                }).then(function(token) {
-                    $(".contactForm #captchaResponse").val(token);
+            var set_recaptcha = function(action) {
+                grecaptcha.ready(function() {
+                    grecaptcha.execute("6LfT7JoUAAAAAOJeXkJp-_YhnKEvnz3DhEM-ni2n", {
+                        action: action
+                    }).then(function(token) {
+                        $(".contactForm #captchaResponse").val(token);
+                    });
                 });
-
-            });
+            }
+            set_recaptcha('contactform_load');
 
             $(".contactForm").submit(function(e) {
                 e.preventDefault();
@@ -68,7 +70,7 @@
                                 gtag_event_sent = true;
                                 window.setTimeout(close_callback, 100);
                             }
-                            document.location.reload();
+                            set_recaptcha('contactform_error_retry');
                         }
                         error_text.text(response.message);
                         gtag('event', 'exception', {
@@ -89,9 +91,18 @@
                 })
 
                 .fail(function(xhr, status, error) {
-                    var error_message = `(${xhr.status}) ${status} ${error}`,
+                    var error_message,
                         gtag_event_sent = false,
                         close_callback;
+
+                    if (xhr.readyState < 2) {  // never got to contact a server
+                        error_message = `Failed to contact the form server (network error)`
+                    } else {
+                        error_message = `(${xhr.status}) ${status} ${error}`
+                        if (xhr.responseText) {
+                            error_message = `<p>${error_message}</p><p>${xhr.responseText}</p>`
+                        }
+                    }
 
                     magnificPopup.close();
 
@@ -111,10 +122,10 @@
                             gtag_event_sent = true;
                             window.setTimeout(close_callback, 100);
                         }
-                        document.location.reload();
+                        set_recaptcha('contactform_error_retry');
                     }
 
-                    error_text.text(error_message);
+                    error_text.html(error_message);
                     magnificPopup.open({
                         type: 'inline',
                         items: { src: error_selector },
