@@ -1,12 +1,13 @@
 ---
 title: Logging in asyncio applications
-date: 2019-05-11 00:00:00 +00:00
+date: 2019-05-11 01:00:00 +01:00
 categories:
 - python
 tags:
 - asyncio
 - logging
-description: Strategy to adapt the standard library logging framework for an asyncio app.
+description: Strategy to adapt the standard library logging framework for an asyncio
+  app.
 ---
 
 So you are building an asyncio-based application, and like most production-quality systems, you need to log events throughout. Normally, you'd reach for the [`logging` module][logging], but the logging module uses blocking I/O when emitting records.
