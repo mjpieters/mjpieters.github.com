@@ -1,5 +1,5 @@
 ---
-title: 'Online meeting'
+title: Online meeting
 permalink: "/meeting"
 excerpt: Online meeting via daily.co
 indexing: false

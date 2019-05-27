@@ -1,5 +1,5 @@
 ---
-title: 'Schedule a meeting with me'
+title: Schedule a meeting with me
 permalink: "/schedule"
 excerpt: Schedule a meeting by picking a time in my calendar
 indexing: false
