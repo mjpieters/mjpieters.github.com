@@ -102,9 +102,10 @@ So this time around I decided to time these:
 ... 
 >>> def test2(): _charescape.sub(_replace_struct, testdocument.encode('unicode_escape'))
 ... 
->>> declaration = u'\
-... Alle mennesker er f\xf8dt frie og med samme menneskeverd og menneskerettigheter. \
-... De er utstyrt med fornuft og samvittighet og b\xf8r handle mot hverandre i brorskapets \xe5nd.'
+>>> declaration = (
+...     u'Alle mennesker er f\xf8dt frie og med samme menneskeverd og menneskerettigheter. '
+...     u'De er utstyrt med fornuft og samvittighet og b\xf8r handle mot hverandre i brorskapets \xe5nd.'
+... )
 >>> testdocument = declaration * 100
 >>> timeit.timeit('test1()', 'from __main__ import test1', number=500)
 5.982733964920044
