@@ -25,6 +25,7 @@ My strategy is simply to move all root handlers to a `QueueListener` object befo
 I do customise the `QueueHandler` class a little, but only minimally so: there is no need to prepare records that go into a local, in-process queue, we can skip that process and minimise the cost of logging further:
 
 ```python
+import asyncio
 import logging
 import logging.handlers
 try:
@@ -38,9 +39,11 @@ from typing import List
 
 class LocalQueueHandler(logging.handlers.QueueHandler):
     def emit(self, record: logging.LogRecord) -> None:
-        # Removed the call to self.prepare()
+        # Removed the call to self.prepare(), handle task cancellation
         try:
             self.enqueue(record)
+        except asyncio.CancelledError:
+            raise
         except Exception:
             self.handleError(record)
 
