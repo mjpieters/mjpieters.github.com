@@ -17,4 +17,4 @@ I have decades of experience with web applications, content management, database
 
 [![arc()](https://assets.codementor.io/cmx-dev-badge.svg)](https://arc.dev/developers/?referral=mjpieters-1vw2ujpf3q){: rel=¨noopener¨ .align-left}
 
-I'm available as a [mentor and freelancer via Codementor](https://www.codementor.io/mjpieters). [Book me](https://hire.codementor.io?referral=mjpieters-1vw2ujpf3q) for one-on-one sessions, freelance tasks or code reviews. Have a larger Python project you need implementing? Then [hire me through arc()](https://arc.dev/developers/?referral=mjpieters-1vw2ujpf3q) (*formerly Codementor X*). Or just use the [contact form](/contact/).
+I'm available as a [mentor and freelancer via Codementor](https://www.codementor.io/mjpieters). Book me for one-on-one sessions, freelance tasks or code reviews. Have a larger Python project you need implementing? Then [hire me through arc()](https://arc.dev/developers/?referral=mjpieters-1vw2ujpf3q) (*formerly Codementor X*). Or just use the [contact form](/contact/).
