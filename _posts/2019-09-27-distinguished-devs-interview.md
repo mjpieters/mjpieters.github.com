@@ -1,6 +1,6 @@
 ---
 title: Interview on Distinguished Devs
-date: 2016-11-24 00:00:00 +00:00
+date: 2019-09-27 00:00:00 +00:00
 categories:
 - python
 tags:
