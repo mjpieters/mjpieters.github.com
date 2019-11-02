@@ -8,8 +8,10 @@ tags:
 - interview
 - stackoverflow
 read_time: false
-description: I was interviewed by Ben James for his "Distinguished Devs" podcast series. Read his take on it, and hear me talk about my career.
+description: I was interviewed by Ben James for his "Distinguished Devs" podcast series.
+  Read his take on it, and hear me talk about my career.
 ---
+
 Recently, [Ben James](https://dev.to/bengineer) reached out to me for an interview, to appear on his [*Distinguished Devs* interview series](https://dev.to/bengineer/elite-devs-0-introduction-247).
 
 You can listen to it right here:
