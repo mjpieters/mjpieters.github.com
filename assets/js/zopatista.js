@@ -149,9 +149,9 @@
     external.click((e) => {
       // Record outbound links as events, but only if it'll update this window.
       // detection based on https://github.com/googleanalytics/autotrack/blob/master/lib/plugins/outbound-link-tracker.js
-      const url = $(this).attr('href')
-      const newtab = $(this).attr('target') === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.which > 1
-      const callback = newtab ? () => {} : () => { document.location = url }
+      var url = $(this).attr('href')
+      var newtab = $(this).attr('target') === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.which > 1
+      var callback = newtab ? () => {} : () => { document.location = url }
       if (!newtab) { e.preventDefault() }
       window.setTimeout(callback, 1000)
       gtag('event', 'click', {
