@@ -13,11 +13,11 @@
 
     // Contact form handling
     if ($('.contactForm').length) {
-      const setReCaptcha = (action) => {
+      const setReCaptcha = action => {
         grecaptcha.ready(() => {
           grecaptcha.execute(reCaptchaSiteKey, {
             action: action
-          }).then((token) => {
+          }).then(token => {
             $('.contactForm #captchaResponse').val(token)
           })
         })
@@ -28,7 +28,7 @@
       // refresh point.
       window.setInterval(setReCaptcha, reCaptchaTokenMaxAge * 0.9, 'contactform_token_refresh')
 
-      $('.contactForm').submit((e) => {
+      $('.contactForm').submit(e => {
         e.preventDefault()
 
         const form = $(e.target)
@@ -146,7 +146,7 @@
     const hostname = document.location.hostname
     const external = $('a[href]').filter((_, a) => { return a.hostname !== hostname })
 
-    external.click((e) => {
+    external.click(e => {
       // Record outbound links as events, but only if it'll update this window.
       // detection based on https://github.com/googleanalytics/autotrack/blob/master/lib/plugins/outbound-link-tracker.js
       const url = $(e.target).attr('href')
