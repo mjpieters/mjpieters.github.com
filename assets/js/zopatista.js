@@ -1,6 +1,7 @@
 /* global grecaptcha */
 (($, window, document) => {
   const reCaptchaSiteKey = '6LfT7JoUAAAAAOJeXkJp-_YhnKEvnz3DhEM-ni2n'
+  const reCaptchaTokenMaxAge = 60 * 2 // two minutes, see https://developers.google.com/recaptcha/docs/verify
 
   $(() => {
     const gtag = window.gtag || ((command, action, params) => {
@@ -22,6 +23,10 @@
         })
       }
       setReCaptcha('contactform_load')
+      // tokens are valid for a limited amount of time, so we want to refresh them periodically
+      // in case someone takes longer between page load and submit. 90% of the maximum is a good
+      // refresh point.
+      window.setInterval(setReCaptcha, reCaptchaTokenMaxAge * 0.9, 'contactform_token_refresh')
 
       $('.contactForm').submit((e) => {
         e.preventDefault()
