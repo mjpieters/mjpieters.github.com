@@ -50,7 +50,7 @@
           url: href,
           data: form.serialize()
         })
-          .done((response) => {
+          .done(response => {
             let selector
             let closeCallback = null
             let gtagEventSent = false
@@ -144,7 +144,7 @@
 
     // Outgoing link tracking
     const hostname = document.location.hostname
-    const external = $('a[href]').filter((_, a) => { return a.hostname !== hostname })
+    const external = $('a[href]').filter((_, a) => a.hostname !== hostname)
 
     external.click(e => {
       // Record outbound links as events, but only if it'll update this window.
