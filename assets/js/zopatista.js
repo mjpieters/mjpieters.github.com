@@ -20,6 +20,10 @@
             }
             set_recaptcha('contactform_load');
 
+            // periodically reload, as tokens only last for 2 minutes;
+            // this is the 90% point of the timeout:
+            window.setInterval(set_recaptcha, 108000, "contactform_refresh");
+
             $(".contactForm").submit(function(e) {
                 e.preventDefault();
 
