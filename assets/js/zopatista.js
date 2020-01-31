@@ -1,158 +1,160 @@
-(function($, window, document) {
-    $(function() {
-        var gtag = window.gtag || function(command, action, params) {
-            console.log('gtag()', arguments);
-            if (command == 'event' && 'event_callback' in params) {
-                params['event_callback']();
+/* global grecaptcha */
+(($, window, document) => {
+  const reCaptchaSiteKey = '6LfT7JoUAAAAAOJeXkJp-_YhnKEvnz3DhEM-ni2n'
+
+  $(() => {
+    const gtag = window.gtag || ((command, action, params) => {
+      console.log('gtag()', command, action, params)
+      if (command === 'event' && 'event_callback' in params) {
+        params.event_callback()
+      }
+    })
+
+    // Contact form handling
+    if ($('.contactForm').length) {
+      const setReCaptcha = (action) => {
+        grecaptcha.ready(() => {
+          grecaptcha.execute(reCaptchaSiteKey, {
+            action: action
+          }).then((token) => {
+            $('.contactForm #captchaResponse').val(token)
+          })
+        })
+      }
+      setReCaptcha('contactform_load')
+
+      $('.contactForm').submit((e) => {
+        e.preventDefault()
+
+        const form = $(this)
+        const href = form.attr('action')
+        const email = form.find('#contact_email').val() || '<no email set>'
+        const successSelector = form.data('success')
+        const errorSelector = form.data('error')
+        const errorText = $(form.data('error-text'))
+        const magnificPopup = $.magnificPopup.instance
+
+        gtag('event', 'submit', {
+          event_category: 'contact',
+          event_label: email
+        })
+
+        $.ajax({
+          type: 'POST',
+          dataType: 'json',
+          url: href,
+          data: $(this).serialize()
+        })
+          .done((response) => {
+            var selector
+            var closeCallback = null
+            var gtagEventSent = false
+            var gtagAction = 'successful'
+
+            magnificPopup.close()
+
+            if (response.status === 'success') {
+              selector = successSelector
+              closeCallback = () => {
+                if (!gtagEventSent) {
+                  // wait another 100ms before actually closing
+                  gtagEventSent = true
+                  window.setTimeout(closeCallback, 100)
+                }
+                document.location = '/'
+              }
+            } else {
+              gtagAction = 'error'
+              selector = errorSelector
+              closeCallback = () => {
+                if (!gtagEventSent) {
+                  // wait another 100ms before actually closing
+                  gtagEventSent = true
+                  window.setTimeout(closeCallback, 100)
+                }
+                setReCaptcha('contactform_error_retry')
+              }
+              errorText.text(response.message)
+              gtag('event', 'exception', {
+                description: `Contact form submission error: ${JSON.stringify(response)}`,
+                fatal: false
+              })
             }
-        };
+            gtag('event', gtagAction, {
+              event_category: 'contact',
+              event_label: email,
+              event_callback: () => { gtagEventSent = true }
+            })
+            magnificPopup.open({
+              type: 'inline',
+              items: { src: selector },
+              callbacks: { close: closeCallback }
+            }, 0)
+          })
 
-        // Contact form handling
-        if ($(".contactForm").length) {
-            var set_recaptcha = function(action) {
-                grecaptcha.ready(function() {
-                    grecaptcha.execute("6LfT7JoUAAAAAOJeXkJp-_YhnKEvnz3DhEM-ni2n", {
-                        action: action
-                    }).then(function(token) {
-                        $(".contactForm #captchaResponse").val(token);
-                    });
-                });
+          .fail((xhr, status, error) => {
+            var errorMessage
+            var gtagEventSent = false
+            var closeCallback
+
+            if (xhr.readyState < 2) { // never got to contact a server
+              errorMessage = 'Failed to contact the form server (network error)'
+            } else {
+              errorMessage = `(${xhr.status}) ${status} ${error}`
+              if (xhr.responseText) {
+                errorMessage = `<p>${errorMessage}</p><p>${xhr.responseText}</p>`
+              }
             }
-            set_recaptcha('contactform_load');
 
-            $(".contactForm").submit(function(e) {
-                e.preventDefault();
+            magnificPopup.close()
 
-                var form = $(this),
-                    href = form.attr("action"),
-                    email = form.find('#contact_email').val() || '<no email set>',
-                    success_selector = form.data("success"),
-                    error_selector = form.data("error"),
-                    error_text = $(form.data("error-text")),
-                    magnificPopup = $.magnificPopup.instance;
+            gtag('event', 'fail', {
+              event_category: 'contact',
+              event_label: email,
+              event_callback: () => { gtagEventSent = true }
+            })
+            gtag('event', 'exception', {
+              description: `Contact form submission failure: ${errorMessage}`,
+              fatal: true
+            })
 
-                gtag('event', 'submit', {
-                    'event_category': 'contact',
-                    'event_label': email
-                });
+            closeCallback = () => {
+              if (!gtagEventSent) {
+                // wait another 100ms before actually closing
+                gtagEventSent = true
+                window.setTimeout(closeCallback, 100)
+              }
+              setReCaptcha('contactform_error_retry')
+            }
 
-                $.ajax({
-                    type: "POST",
-                    dataType: "json",
-                    url: href,
-                    data: $(this).serialize()
-                })
+            errorText.html(errorMessage)
+            magnificPopup.open({
+              type: 'inline',
+              items: { src: errorSelector },
+              callbacks: { close: closeCallback }
+            }, 0)
+          })
+      })
+    }
 
-                .done(function(response) {
-                    var selector,
-                        close_callback = null,
-                        gtag_event_sent = false,
-                        gtag_action = 'successful';
+    // Outgoing link tracking
+    const hostname = document.location.hostname
+    const external = $('a[href]').filter(() => { return this.hostname !== hostname })
 
-                    magnificPopup.close();
-
-                    if (response.status == "success") {
-                        selector = success_selector;
-                        close_callback = function() {
-                            if (!gtag_event_sent) {
-                                // wait another 100ms before actually closing
-                                gtag_event_sent = true;
-                                window.setTimeout(close_callback, 100);
-                            }
-                            document.location = '/';
-                        }
-                    } else {
-                        gtag_action = 'error'
-                        selector = error_selector;
-                        close_callback = function() {
-                            if (!gtag_event_sent) {
-                                // wait another 100ms before actually closing
-                                gtag_event_sent = true;
-                                window.setTimeout(close_callback, 100);
-                            }
-                            set_recaptcha('contactform_error_retry');
-                        }
-                        error_text.text(response.message);
-                        gtag('event', 'exception', {
-                            description: `Contact form submission error: ${JSON.stringify(response)}`,
-                            fatal: false,
-                        });
-                    }
-                    gtag('event', gtag_action, {
-                        'event_category': 'contact',
-                        'event_label': email,
-                        'event_callback': function() { gtag_event_sent = true; },
-                    });
-                    magnificPopup.open({
-                        type: 'inline',
-                        items: { src: selector },
-                        callbacks: { close: close_callback },
-                    }, 0);
-                })
-
-                .fail(function(xhr, status, error) {
-                    var error_message,
-                        gtag_event_sent = false,
-                        close_callback;
-
-                    if (xhr.readyState < 2) {  // never got to contact a server
-                        error_message = `Failed to contact the form server (network error)`
-                    } else {
-                        error_message = `(${xhr.status}) ${status} ${error}`
-                        if (xhr.responseText) {
-                            error_message = `<p>${error_message}</p><p>${xhr.responseText}</p>`
-                        }
-                    }
-
-                    magnificPopup.close();
-
-                    gtag('event', 'fail', {
-                        'event_category': 'contact',
-                        'event_label': email,
-                        'event_callback': function() { gtag_event_sent = true; },
-                    });
-                    gtag('event', 'exception', {
-                        description: `Contact form submission failure: ${error_message}`,
-                        fatal: true,
-                    });
-
-                    close_callback = function() {
-                        if (!gtag_event_sent) {
-                            // wait another 100ms before actually closing
-                            gtag_event_sent = true;
-                            window.setTimeout(close_callback, 100);
-                        }
-                        set_recaptcha('contactform_error_retry');
-                    }
-
-                    error_text.html(error_message);
-                    magnificPopup.open({
-                        type: 'inline',
-                        items: { src: error_selector },
-                        callbacks: { close: close_callback }
-                    }, 0);
-                });
-            });
-        }
-
-        // Outgoing link tracking
-        var hostname = document.location.hostname,
-            external = $('a[href]').filter(function() { return this.hostname != hostname });
-
-        external.click(function(e) {
-            // Record outbound links as events, but only if it'll update this window.
-            // detection based on https://github.com/googleanalytics/autotrack/blob/master/lib/plugins/outbound-link-tracker.js
-            var url = $(this).attr('href'),
-                newtab = $(this).attr('target') === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.which > 1,
-                callback = newtab ? function() {} : function() { document.location = url; };
-            if (!newtab) { e.preventDefault(); }
-            window.setTimeout(callback, 1000);
-            gtag('event', 'click', {
-                'event_category': 'outbound',
-                'event_label': url,
-                'transport_type': 'beacon',
-                'event_callback': callback,
-            });
-        });
-    });
-}(window.jQuery, window, document));
+    external.click((e) => {
+      // Record outbound links as events, but only if it'll update this window.
+      // detection based on https://github.com/googleanalytics/autotrack/blob/master/lib/plugins/outbound-link-tracker.js
+      const url = $(this).attr('href')
+      const newtab = $(this).attr('target') === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.which > 1
+      const callback = newtab ? () => {} : () => { document.location = url }
+      if (!newtab) { e.preventDefault() }
+      window.setTimeout(callback, 1000)
+      gtag('event', 'click', {
+        event_category: 'outbound',
+        event_label: url,
+        transport_type: 'beacon',
+        event_callback: callback
+      })
+    })
+  })
+})(window.jQuery, window, document)
