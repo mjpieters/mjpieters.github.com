@@ -1,7 +1,7 @@
 /* global grecaptcha */
 (($, window, document) => {
   const reCaptchaSiteKey = '6LfT7JoUAAAAAOJeXkJp-_YhnKEvnz3DhEM-ni2n'
-  const reCaptchaTokenMaxAge = 60 * 2 // two minutes, see https://developers.google.com/recaptcha/docs/verify
+  const reCaptchaTokenMaxAge = 2 * 60 * 1000 // ms, two minutes, see https://developers.google.com/recaptcha/docs/verify
 
   $(() => {
     const gtag = window.gtag || ((command, action, params) => {
