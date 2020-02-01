@@ -20,7 +20,7 @@ for your project? Send me a message and I'll respond as soon as possible.
   <input type="email" id="contact_email" maxlength="false"
     required="required" name="email"></label>
   <label for="contact_message">Message
-  <textarea maxlength="300" type="comment" cols="50" rows="4"
+  <textarea minlength="20" maxlength="500" type="comment" cols="50" rows="4"
     id="contact_message" required="required"
     name="message"></textarea></label>
   <input type="hidden" name="_gotcha">
