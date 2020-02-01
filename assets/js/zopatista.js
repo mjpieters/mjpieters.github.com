@@ -77,6 +77,8 @@
       const captchaResponse = form.find('#captchaResponse')
       const submitButton = form.find(':submit')
       const inputs = Array.from(form.find('input,textarea'))
+      const nameField = form.find('#contact_name')
+      const emailField = form.find('#contact_email')
       const messageArea = form.find('#contact_message')
       const soFeedback = form.find('#stackoverflow_feedback')
       const soScore = form.find('#contact_soscore')
@@ -105,10 +107,24 @@
           // given that the input event handler has been debounced at 400ms and 'fast'
           // switches states in 200ms, the .stop() calls are probably entirely redundant.
           // Still, it's probably good practice.
-          if (soFeedbackShown) { soFeedback.stop(true, true).slideUp('fast') }
+          if (soFeedbackShown) {
+            soFeedback.stop(true, true).slideUp('fast')
+            gtag('event', 'so_feedback_shown', {
+              event_category: 'contact',
+              event_label: [nameField.val(), emailField.val(), msg].join('|'),
+              value: score
+            })
+          }
           soFeedbackShown = false
         } else {
-          if (!soFeedbackShown) { soFeedback.stop(true, true).slideDown('fast') }
+          if (!soFeedbackShown) {
+            soFeedback.stop(true, true).slideDown('fast')
+            gtag('event', 'so_feedback_hidden', {
+              event_category: 'contact',
+              event_label: [nameField.val(), emailField.val(), msg].join('|'),
+              value: score
+            })
+          }
           soFeedbackShown = true
         }
       }, 400)) // The Doherty Threshold, https://lawsofux.com/doherty-threshold, via https://ux.stackexchange.com/q/95336
@@ -121,7 +137,7 @@
         e.preventDefault()
 
         const href = form.attr('action')
-        const email = form.find('#contact_email').val() || '<no email set>'
+        const email = emailField.val() || '<no email set>'
         const successSelector = form.data('success')
         const errorSelector = form.data('error')
         const errorText = $(form.data('error-text'))
