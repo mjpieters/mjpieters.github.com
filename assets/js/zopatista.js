@@ -76,7 +76,6 @@
       const form = $('.contactForm')
       const captchaResponse = form.find('#captchaResponse')
       const submitButton = form.find(':submit')
-      const inputs = Array.from(form.find('input,textarea'))
       const nameField = form.find('#contact_name')
       const emailField = form.find('#contact_email')
       const messageArea = form.find('#contact_message')
@@ -129,9 +128,8 @@
         }
       }, 400)) // The Doherty Threshold, https://lawsofux.com/doherty-threshold, via https://ux.stackexchange.com/q/95336
 
-      form.find('input, textarea').on('input', e => {
-        submitButton.prop('disabled', !inputs.every(inp => inp.validity.valid))
-      })
+      // the submit button is only enabled if the form is valid
+      form.find('input, textarea').on('input', e => submitButton.prop('disabled', !form.get(0).checkValidity()))
 
       form.submit(e => {
         e.preventDefault()
