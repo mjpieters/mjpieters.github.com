@@ -4,7 +4,7 @@ permalink: "/contact/"
 layout: single
 ---
 
-Got a question, or are looking to hire a mentor, architect or software engineer
+Got a question, or looking to hire a mentor, architect or software engineer
 for your project? Send me a message and I'll respond as soon as possible.
 
 <form
