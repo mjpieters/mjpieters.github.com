@@ -15,7 +15,7 @@ for your project? Send me a message and I'll respond as soon as possible.
   data-error-text="#error-message">
   <label for="contact_name">Name
   <input type="text" id="contact_name" maxlength="false"
-    required="required" name="name"></label>
+    required="required" name="name" autofocus="true"></label>
   <label for="contact_email">Email address
   <input type="email" id="contact_email" maxlength="false"
     required="required" name="email"></label>
