@@ -135,7 +135,10 @@
       form.find('input[maxlength],textarea[maxlength]').on('input', e => {
         const elem = $(e.target)
         const maxlen = parseInt(elem.attr('maxlength'), 10)
-        if (isNaN(maxlen)) { return }
+        if (isNaN(maxlen)) {
+          elem.off(e)
+          return
+        }
         const len = elem.val().length
         let countSpan = elem.prev('.message-count')
 
