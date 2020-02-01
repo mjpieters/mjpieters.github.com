@@ -7,3 +7,4 @@ _site
 Gemfile.lock
 _utilities
 package-lock.json
+node_modules/
