@@ -3,6 +3,66 @@
   const reCaptchaSiteKey = '6LfT7JoUAAAAAOJeXkJp-_YhnKEvnz3DhEM-ni2n'
   const reCaptchaTokenMaxAge = 2 * 60 * 1000 // ms, two minutes, see https://developers.google.com/recaptcha/docs/verify
 
+  const soPatterns = [
+    // case insensitive
+    new RegExp(
+      '\\b(?:' +
+      [
+        'stackoverflow\\.com',
+        'stackoverflow',
+        'stack\\s+overflow',
+        'on\\s+stack',
+        'deleted',
+        'my\\s+(?:answer|question|comment|post|response)s?',
+        'reputations?',
+        'upvotes',
+        'reconsider\\s+your\\s+actions',
+        'review\\s+(?:my\\s+)?ban',
+        'who\\s+do\\s+you\\s+think\\s+you\\s+are'
+      ].join('|') +
+      ')\\b',
+      'ig'
+    ),
+    // case sensitive
+    new RegExp(
+      '\\b(?:' +
+      [
+        'on\\s+SO'
+      ].join('|') +
+      ')\\b',
+      'g'
+    )
+  ]
+  const nonSoPatterns = [
+    new RegExp(
+      '\\b(?:' +
+      [
+        'for\\s+freelance\\s+work',
+        '(?:you\\s+)?are\\s+available',
+        'be\\s+available',
+        '(?:your\\s+)?hourly\\s+rate',
+        'interview\\s+you',
+        'python\\s+training',
+        'partnering\\s+with'
+      ].join('|') +
+      ')\\b',
+      'ig'
+    )
+  ]
+  const soScoreThreshold = 2
+
+  const countMatches = (text, patterns) => patterns.reduce((sum, pat) => sum + (text.match(pat) || []).length, 0)
+
+  // debounce: only call an event callback once repeated events have subsided long enough
+  const debounce = (func, wait) => {
+    let timeout = null
+    return (...args) => {
+      const next = () => func(...args)
+      window.clearTimeout(timeout)
+      timeout = window.setTimeout(next, wait)
+    }
+  }
+
   $(() => {
     const gtag = window.gtag || ((command, action, params) => {
       console.log('gtag()', command, action, params)
@@ -17,6 +77,10 @@
       const captchaResponse = form.find('#captchaResponse')
       const submitButton = form.find(':submit')
       const inputs = Array.from(form.find('input,textarea'))
+      const messageArea = form.find('#contact_message')
+      const soFeedback = form.find('#stackoverflow_feedback')
+      const soScore = form.find('#contact_soscore')
+      let soFeedbackShown = false
 
       const setReCaptcha = action => {
         grecaptcha.ready(() => {
@@ -30,6 +94,24 @@
       // in case someone takes longer between page load and submit. 90% of the maximum is a good
       // refresh point.
       window.setInterval(setReCaptcha, reCaptchaTokenMaxAge * 0.9, 'contactform_token_refresh')
+
+      // check for subjects I probably will ignore; these don't block submitting but give feedback on
+      // where to go instead.
+      messageArea.on('input', debounce(e => {
+        const msg = messageArea.val()
+        const score = countMatches(msg, soPatterns) - countMatches(msg, nonSoPatterns)
+        soScore.val(score)
+        if (score < soScoreThreshold) {
+          // given that the input event handler has been debounced at 400ms and 'fast'
+          // switches states in 200ms, the .stop() calls are probably entirely redundant.
+          // Still, it's probably good practice.
+          if (soFeedbackShown) { soFeedback.stop(true, true).slideUp('fast') }
+          soFeedbackShown = false
+        } else {
+          if (!soFeedbackShown) { soFeedback.stop(true, true).slideDown('fast') }
+          soFeedbackShown = true
+        }
+      }, 400)) // The Doherty Threshold, https://lawsofux.com/doherty-threshold, via https://ux.stackexchange.com/q/95336
 
       form.find('input, textarea').on('input', e => {
         submitButton.prop('disabled', !inputs.every(inp => inp.validity.valid))

@@ -59,4 +59,8 @@ blockquote {
   :valid + .form-field-valid {
     display: block;
   }
+
+  #stackoverflow_feedback {
+    display: none;
+  }
 }
