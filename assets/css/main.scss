@@ -44,3 +44,19 @@ blockquote {
   	margin-top: 0em;
   }
 }
+
+.contactForm {
+  .form-field-valid {
+    display: none;
+    color: green;
+    position: relative;
+    float: right;
+    margin-right: 0.5em;
+    margin-top: -3.5ex;
+    z-index: 2;
+  }
+
+  :valid + .form-field-valid {
+    display: block;
+  }
+}

@@ -13,13 +13,16 @@
 
     // Contact form handling
     if ($('.contactForm').length) {
+      const form = $('.contactForm')
+      const captchaResponse = form.find('#captchaResponse')
+      const submitButton = form.find(':submit')
+      const inputs = Array.from(form.find('input,textarea'))
+
       const setReCaptcha = action => {
         grecaptcha.ready(() => {
           grecaptcha.execute(reCaptchaSiteKey, {
             action: action
-          }).then(token => {
-            $('.contactForm #captchaResponse').val(token)
-          })
+          }).then(token => captchaResponse.val(token))
         })
       }
       setReCaptcha('contactform_load')
@@ -28,10 +31,13 @@
       // refresh point.
       window.setInterval(setReCaptcha, reCaptchaTokenMaxAge * 0.9, 'contactform_token_refresh')
 
-      $('.contactForm').submit(e => {
+      form.find('input, textarea').on('input', e => {
+        submitButton.prop('disabled', !inputs.every(inp => inp.validity.valid))
+      })
+
+      form.submit(e => {
         e.preventDefault()
 
-        const form = $(e.target)
         const href = form.attr('action')
         const email = form.find('#contact_email').val() || '<no email set>'
         const successSelector = form.data('success')

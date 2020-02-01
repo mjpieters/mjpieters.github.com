@@ -15,14 +15,17 @@ for your project? Send me a message and I'll respond as soon as possible.
   data-error-text="#error-message">
   <label for="contact_name">Name
   <input type="text" id="contact_name" maxlength="false"
-    required="required" name="name" autofocus="true"></label>
+    required="required" name="name" autofocus="true">
+    <i class="form-field-valid fas fa-check"></i></label>
   <label for="contact_email">Email address
   <input type="email" id="contact_email" maxlength="false"
-    required="required" name="email"></label>
+    required="required" name="email">
+    <i class="form-field-valid fas fa-check"></i></label>
   <label for="contact_message">Message
   <textarea minlength="20" maxlength="500" type="comment" cols="50" rows="4"
     id="contact_message" required="required"
-    name="message"></textarea></label>
+    name="message"></textarea>
+    <i class="form-field-valid fas fa-check"></i></label>
   <input type="hidden" name="_gotcha">
   <input type="hidden" id="captchaResponse" name="g-recaptcha-response">
   <button type="submit">Send Message</button>
