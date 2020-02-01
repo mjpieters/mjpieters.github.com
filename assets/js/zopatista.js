@@ -131,6 +131,29 @@
       // the submit button is only enabled if the form is valid
       form.on('input', 'input,textarea', e => submitButton.prop('disabled', !e.delegateTarget.checkValidity()))
 
+      // show a counter on fields with a max length; only shows up when 50% of the length has been consumed
+      form.find('input[maxlength],textarea[maxlength]').on('input', e => {
+        const elem = $(e.target)
+        const len = elem.val().length
+        const maxlen = parseInt(elem.attr('maxlength'), 10)
+        let countSpan = elem.prev('.message-count')
+
+        if (len < (maxlen / 2)) {
+          if (countSpan.length) countSpan.remove()
+          return
+        }
+
+        if (!countSpan.length) {
+          countSpan = $(`
+            <span class="message-count">
+              <span class="counter">${len}</span>/<span class="maxlength">${maxlen}</span>
+            </span>
+          `).insertBefore(elem)
+        }
+
+        countSpan.find('.counter').text(len)
+      })
+
       form.submit(e => {
         e.preventDefault()
 

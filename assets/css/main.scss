@@ -63,4 +63,13 @@ blockquote {
   #stackoverflow_feedback {
     display: none;
   }
+
+  .message-count {
+    display: relative;
+    float: right;
+    margin-top: 1ex;
+    margin-right: 1em;
+    font-size: .6em;
+    color: $muted-text-color;
+  }
 }
