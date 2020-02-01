@@ -28,7 +28,7 @@ for your project? Send me a message and I'll respond as soon as possible.
     <i class="form-field-valid fas fa-check"></i></label>
   <input type="hidden" name="_gotcha">
   <input type="hidden" id="captchaResponse" name="g-recaptcha-response">
-  <button type="submit">Send Message</button>
+  <button type="submit" disabled="disabled">Send Message</button>
 </form>
 
 {:dialog: .form-dialog .mfp-hide}
