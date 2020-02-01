@@ -156,6 +156,7 @@
         }
 
         countSpan.find('.counter').text(len)
+        countSpan.toggleClass('near-limit', len > (maxlen * 0.9))
       })
 
       form.submit(e => {

@@ -71,5 +71,9 @@ blockquote {
     margin-right: 1em;
     font-size: .6em;
     color: $muted-text-color;
+
+    &.near-limit {
+      color: $warning-color;
+    }
   }
 }
