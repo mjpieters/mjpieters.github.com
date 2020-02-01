@@ -134,8 +134,9 @@
       // show a counter on fields with a max length; only shows up when 50% of the length has been consumed
       form.find('input[maxlength],textarea[maxlength]').on('input', e => {
         const elem = $(e.target)
-        const len = elem.val().length
         const maxlen = parseInt(elem.attr('maxlength'), 10)
+        if (isNaN(maxlen)) { return }
+        const len = elem.val().length
         let countSpan = elem.prev('.message-count')
 
         if (len < (maxlen / 2)) {
