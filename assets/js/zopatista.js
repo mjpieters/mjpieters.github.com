@@ -129,7 +129,7 @@
       }, 400)) // The Doherty Threshold, https://lawsofux.com/doherty-threshold, via https://ux.stackexchange.com/q/95336
 
       // the submit button is only enabled if the form is valid
-      form.find('input, textarea').on('input', e => submitButton.prop('disabled', !form.get(0).checkValidity()))
+      form.on('input', 'input,textarea', e => submitButton.prop('disabled', !e.delegateTarget.checkValidity()))
 
       form.submit(e => {
         e.preventDefault()
