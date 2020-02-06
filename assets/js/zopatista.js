@@ -108,7 +108,7 @@
           // Still, it's probably good practice.
           if (soFeedbackShown) {
             soFeedback.stop(true, true).slideUp('fast')
-            gtag('event', 'so_feedback_shown', {
+            gtag('event', 'so_feedback_hidden', {
               event_category: 'contact',
               event_label: [nameField.val(), emailField.val(), msg].join('|'),
               value: score
@@ -118,7 +118,7 @@
         } else {
           if (!soFeedbackShown) {
             soFeedback.stop(true, true).slideDown('fast')
-            gtag('event', 'so_feedback_hidden', {
+            gtag('event', 'so_feedback_shown', {
               event_category: 'contact',
               event_label: [nameField.val(), emailField.val(), msg].join('|'),
               value: score
@@ -171,7 +171,8 @@
 
         gtag('event', 'submit', {
           event_category: 'contact',
-          event_label: email
+          event_label: email,
+          value: parseInt(soScore.val())
         })
 
         $.ajax({
@@ -218,6 +219,7 @@
             gtag('event', gtagAction, {
               event_category: 'contact',
               event_label: email,
+              value: parseInt(soScore.val()),
               event_callback: () => { gtagEventSent = true }
             })
             magnificPopup.open({
