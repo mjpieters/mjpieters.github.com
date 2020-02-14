@@ -8,19 +8,19 @@ layout: single
 classes: wide
 ---
 
-<div class="iframe-container" style="
-    overflow: hidden;
-    padding-top: 75%;
-    position: relative;
-"><iframe allowfullscreen style="
-    border: 0;
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    "
-    frameborder="0"
-    allow="camera; microphone; autoplay"
-    src="https://zopatista.daily.co/hello">
-</iframe></div>
+<div class="online-meeting">
+<iframe id="daily-call-frame" allowfullscreen allow="camera; microphone; autoplay"></iframe>
+</div>
+<script crossorigin src="https://unpkg.com/@daily-co/daily-js"></script>
+<script>
+((document, window) => {
+  const callFrame = window.DailyIframe.wrap(
+    document.getElementById('daily-call-frame')
+  )
+  callFrame.join({
+    url: 'https://zopatista.daily.co/hello',
+    showFullscreenButton: true,
+    showLeaveButton: true,
+  })
+})(document, window)
+</script>

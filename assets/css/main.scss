@@ -45,6 +45,21 @@ blockquote {
   }
 }
 
+.online-meeting {
+  overflow: hidden;
+  padding-top: 75%;
+  position: relative;
+
+  #daily-call-frame {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }  
+}
+
 .contactForm {
   .form-field-valid {
     display: none;
