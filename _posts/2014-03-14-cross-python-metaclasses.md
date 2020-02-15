@@ -17,7 +17,7 @@ redirect_from:
 
 When you want to create a class including a metaclass, making it compatible with both Python 2 and 3 can be a little tricky. 
 
-The excellent [`six` library](http://pythonhosted.org/six/) provides you with a [`six.with_metaclass()` factory function](http://pythonhosted.org/six/#six.with_metaclass) that'll generate a base class for you from a given metaclass:
+The excellent [`six` library](https://six.readthedocs.io/) provides you with a [`six.with_metaclass()` factory function](https://six.readthedocs.io/#six.with_metaclass) that'll generate a base class for you from a given metaclass:
 
 ```python
 from six import with_metaclass
@@ -83,7 +83,7 @@ which results in a cleaner MRO:
 
 As it turns out, [Jason Coombs took Guido's time machine](https://bitbucket.org/gutworth/six/pull-request/12/add-patch_with_metaclass-which-provides-a) and added the same functionality to the `six` library last summer. Not only that, he included support for classes with `__slots__` in his version. Thanks to [Mikhail Korobov](http://kmike.ru/) for pointing this out.
 
-The `six` decorator is called [`@six.add_metaclass()`](http://pythonhosted.org/six/#six.add_metaclass):
+The `six` decorator is called [`@six.add_metaclass()`](https://six.readthedocs.io/#six.add_metaclass):
 
 ```python
 @six.add_metaclass(Meta)
