@@ -4,36 +4,47 @@ Bundler.require(:default, :development, :jekyll_plugins)
 require 'jekyll'
 
 HERE = File.expand_path("./")
-SITE = File.join(HERE, "_site")
 TEST_CACHE = File.join(HERE, ".cache", "htmlproofer")
 
-def jekyll(serve=true)
-  options = {
-    :source => HERE,
-    :destination => SITE,
-    :watch => serve,
-    :serving => serve,
-  }.merge( serve ? {:url => 'http://localhost:4000'} : {} )
-  Jekyll::Commands::Build.process(options)
-  if serve
-    Jekyll::Commands::Serve.process(options)
+namespace :jekyll do
+  def jekyll_site()
+    # retrieve the jekyll site, with config
+    options = Jekyll::Command.configuration_from_options(
+      {:source => HERE}
+    )
+    return Jekyll::Site.new(options)
   end
-rescue
-  nil
+
+  def run(serve=true)
+    options = jekyll_site().config.merge({
+      :watch => serve,
+      :serving => serve,
+    }).merge( serve ? {:url => 'http://localhost:4000'} : {} )
+    Jekyll::Commands::Build.process(options)
+    if serve
+      Jekyll::Commands::Serve.process(options)
+    end
+  rescue
+    nil
+  end
+
+  desc "Build the site out"
+  task :build do
+    run(serve=false)
+  end
+
+  task :serve do
+    run()
+  end
 end
 
-desc "Build the site out into #{File.basename(SITE)}"
-task :build do
-  jekyll(serve=false)
-end
 
 desc "Serve up the site (watching for changes)"
-task :serve do
-  jekyll()
-end
+task :serve => "jekyll:serve"
+
 
 desc "Check the site for linking issues"
-task :test => [:build] do
+task :test => "jekyll:build" do
   require 'html-proofer'
 
   options = {
@@ -51,5 +62,6 @@ task :test => [:build] do
       :timeframe => "30d",
     },
   }
-  HTMLProofer.check_directory(SITE, options).run
+  destination = jekyll_site().config["destination"]
+  HTMLProofer.check_directory(destination, options).run
 end
