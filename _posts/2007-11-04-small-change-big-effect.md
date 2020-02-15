@@ -55,5 +55,5 @@ and presto, indexing was more than twice as fast, as shown by the pretty graph o
 
 Not bad for a one-line change.
 
-*This article was originally published on [jarn.com](http://jarn.com).*
+*This article was originally published on [jarn.com](http://web.archive.org/web/20111231230726/http://www.jarn.com/).*
 

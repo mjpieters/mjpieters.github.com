@@ -82,4 +82,4 @@ Now that we have found the lost object, we can recover it. We simply exported it
 
 Note that you'll need to reindex the imported content and that any related data that lives outside of the object itself is gone. For example, its intid are gone and all relationships to it will have to be recreated etc. But you just saved your customers bacon, I'm sure they won't mind a little manual work!
 
-*This article was originally published on [jarn.com](http://jarn.com).*
+*This article was originally published on [jarn.com](http://web.archive.org/web/20111231230726/http://www.jarn.com/).*

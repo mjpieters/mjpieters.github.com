@@ -112,5 +112,5 @@ Instead of pumping out the water, we should of course patch the leak. We have ye
 
 I've found that in practice some relationships only were still referenced by intid keyrefs and present in the relationships index, but no longer were present in the relationship utility itself. These have to be manually unindexed and removed; the code examples above have been updated to reflect this.
 
-*This article was originally published on [jarn.com](http://jarn.com).*
+*This article was originally published on [jarn.com](http://web.archive.org/web/20111231230726/http://www.jarn.com/).*
 

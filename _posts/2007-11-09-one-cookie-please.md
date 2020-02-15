@@ -48,6 +48,6 @@ With statusmessages for example, each message consists of a message and a type s
 > <cite>[Zero Wing, 1989](http://en.wikipedia.org/wiki/All_your_base_are_belong_to_us)</cite>
 {: cite="http://en.wikipedia.org/wiki/All_your_base_are_belong_to_us"}
 
-*This article was originally published on [jarn.com](http://jarn.com).*
+*This article was originally published on [jarn.com](http://web.archive.org/web/20111231230726/http://www.jarn.com/).*
 
 [^1]: the original link, `http://dev.plone.org/plone/ticket/6943`, is unfortunately now lost without trace.
