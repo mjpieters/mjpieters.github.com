@@ -5,7 +5,7 @@ require 'jekyll'
 
 HERE = File.expand_path("./")
 SITE = File.join(HERE, "_site")
-CONFIG = File.join(HERE, "_config.yml")
+TEST_CACHE = File.join(HERE, ".cache", "htmlproofer")
 
 def jekyll(serve=true)
   options = {
@@ -43,6 +43,13 @@ task :test => [:build] do
   	:check_html => true,
   	:check_img_http => true,
   	:check_opengraph => true,
+    :parallel => {
+      :in_processes => 3
+    },
+    :cache => {
+      :storage_dir => TEST_CACHE,
+      :timeframe => "30d",
+    },
   }
   HTMLProofer.check_directory(SITE, options).run
 end
