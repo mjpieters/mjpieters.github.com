@@ -135,6 +135,7 @@ exclude:
 - ".sass-cache"
 - _utilities
 - node_modules
+- bin
 encoding: utf-8
 markdown_ext: markdown,mkdown,mkdn,mkd,md
 markdown: kramdown
