@@ -15,13 +15,13 @@ description: The python pickle module is dangerous, didn't you know?
 
 ## All your base are belong to us
 
-By now you all should have installed [last Tuesday's Hotfix](http://plone.org/products/plone-hotfix/releases/20071106). If you haven't yet, but are running Plone 2.5 or Plone 3.0 websites, you should do so **yesterday**, or at least as soon as humanly possible.
+By now you all should have installed [last Tuesday's Hotfix](http://web.archive.org/web/20080629190539/http://plone.org/products/plone-hotfix/releases/20071106). If you haven't yet, but are running Plone 2.5 or Plone 3.0 websites, you should do so **yesterday**, or at least as soon as humanly possible.
 
 The Hotfix patches a serious security problem in the statusmessages and linkintegrity modules, where network-supplied data was interpreted as [pickles](http://docs.python.org/lib/module-pickle.html). "Network-supplied" data in this case means both cookies and form data, and no authentication is required to exploit the holes.
 
 ## What happen ?
 
-The basic problem with the holes is that the Plone community was totally unaware of how dangerous the pickle module really is. Hanno Schlichting did file a [report](http://dev.plone.org/plone/ticket/6943) a few months ago stating that the code was potentially dangerous, but even he didn't fully appreciate that pickles are a security hole only waiting for attacker input. The scary thing here is that the code in question was written by extremely capable and experienced developers, but none of them were aware of the fact that you cannot ever use pickles to load user-supplied data.
+The basic problem with the holes is that the Plone community was totally unaware of how dangerous the pickle module really is. Hanno Schlichting did file a _report_[^1] a few months ago stating that the code was potentially dangerous, but even he didn't fully appreciate that pickles are a security hole only waiting for attacker input. The scary thing here is that the code in question was written by extremely capable and experienced developers, but none of them were aware of the fact that you cannot ever use pickles to load user-supplied data.
 
 What is needed then, is education. This is my contribution.
 
@@ -49,3 +49,5 @@ With statusmessages for example, each message consists of a message and a type s
 {: cite="http://en.wikipedia.org/wiki/All_your_base_are_belong_to_us"}
 
 *This article was originally published on [jarn.com](http://jarn.com).*
+
+[^1]: the original link, `http://dev.plone.org/plone/ticket/6943`, is unfortunately now lost without trace.
