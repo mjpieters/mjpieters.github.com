@@ -22,6 +22,15 @@ $ bundle install --path .vendor/bundle
 
 For more info, see the [GitHub pages documentation](https://help.github.com/articles/using-jekyll-with-pages).
 
+The local `bin/` directory contains binstubs for the requisite gems, and
+there's a [direnv](https://github.com/zimbatm/direnv) `.envrc` file in the root
+that adds that directory to your PATH when entering this directory. Please
+tell direnv to allow this to work with:
+
+```shell
+$ direnv allow .
+```
+
 ## Running locally
 
 Keep the local toolchain up-to-date with:
