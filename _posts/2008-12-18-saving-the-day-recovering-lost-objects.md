@@ -16,7 +16,7 @@ description: When a customer discovers over a week later that an important objec
 
 A customer discovered that an important entire section of his site was missing and asked us to bring it back. This was in a heavily edited site, with loads of writes each day, but we quickly located the offending transaction: someone had deleted the object in question 9 days earlier.
 
-Undo was no longer an option, though: too many things had changed, not least the catalog. Truncating the Data.fs (removing all transactions since, including the offending one) was not only undesirable, but impossible as the site stores the data in Oracle through [RelStorage](http://wiki.zope.org/ZODB/RelStorage).
+Undo was no longer an option, though: too many things had changed, not least the catalog. Truncating the Data.fs (removing all transactions since, including the offending one) was not only undesirable, but impossible as the site stores the data in Oracle through [RelStorage](http://web.archive.org/web/20081224104516/http://wiki.zope.org/ZODB/RelStorage).
 
 ## Time travel
 
