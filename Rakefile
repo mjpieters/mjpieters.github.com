@@ -1,11 +1,41 @@
-require 'html-proofer'
+require 'rubygems'
+require 'bundler/setup'
+Bundler.require(:default, :development, :jekyll_plugins)
+require 'jekyll'
 
-task :serve do
-  sh "bundle exec jekyll serve --watch"
+HERE = File.expand_path("./")
+SITE = File.join(HERE, "_site")
+CONFIG = File.join(HERE, "_config.yml")
+
+def jekyll(serve=true)
+  options = {
+    :source => HERE,
+    :destination => SITE,
+    :watch => serve,
+    :serving => serve,
+  }.merge( serve ? {:url => 'http://localhost:4000'} : {} )
+  Jekyll::Commands::Build.process(options)
+  if serve
+    Jekyll::Commands::Serve.process(options)
+  end
+rescue
+  nil
 end
 
-task :test do
-  sh "bundle exec jekyll build"
+desc "Build the site out into #{File.basename(SITE)}"
+task :build do
+  jekyll(serve=false)
+end
+
+desc "Serve up the site (watching for changes)"
+task :serve do
+  jekyll()
+end
+
+desc "Check the site for linking issues"
+task :test => [:build] do
+  require 'html-proofer'
+
   options = {
   	:assume_extension => true,
   	:allow_hash_href => true,
@@ -14,5 +44,5 @@ task :test do
   	:check_img_http => true,
   	:check_opengraph => true,
   }
-  HTMLProofer.check_directory("./_site", options).run
+  HTMLProofer.check_directory(SITE, options).run
 end

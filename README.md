@@ -45,6 +45,8 @@ Run a local server to preview posts with:
 $ rake serve
 ```
 
+If you *don't* use direnv and have given direnv permission to run the local `.envrc` settings, then use `bin/rake`, so bundle dependencies can be found.
+
 ## Theme setup
 
 I am using [Minimal Mistakes](https://github.com/mmistakes/minimal-mistakes) as the theme.
