@@ -3,20 +3,26 @@ require 'bundler/setup'
 Bundler.require(:default, :development, :jekyll_plugins)
 require 'jekyll'
 
-HERE = File.expand_path("./")
-TEST_CACHE = File.join(HERE, ".cache", "htmlproofer")
+HERE = Pathname("./").expand_path
+TEST_CACHE = HERE / ".cache" / "htmlproofer"
 
-namespace :jekyll do
-  def jekyll_site()
+module JekyllUtils
+  @@_site = nil
+
+  def site()
     # retrieve the jekyll site, with config
-    options = Jekyll::Command.configuration_from_options(
-      {:source => HERE}
-    )
-    return Jekyll::Site.new(options)
+
+    @@_site ||= begin
+      options = Jekyll::Command.configuration_from_options(
+        {:source => HERE.to_s}
+      )
+      Jekyll::Site.new(options)
+    end
+    return @@_site
   end
 
   def run(serve=true)
-    options = jekyll_site().config.merge({
+    options = JekyllUtils::site().config.merge({
       :watch => serve,
       :serving => serve,
     }).merge( serve ? {:url => 'http://localhost:4000'} : {} )
@@ -28,13 +34,19 @@ namespace :jekyll do
     nil
   end
 
+end
+
+namespace :jekyll do
   desc "Build the site out"
   task :build do
-    run(serve=false)
+    include JekyllUtils
+    if outdated
+      run(serve=false)
+    end
   end
 
   task :serve do
-    run()
+    run
   end
 end
 
@@ -58,10 +70,10 @@ task :test => "jekyll:build" do
       :in_processes => 3
     },
     :cache => {
-      :storage_dir => TEST_CACHE,
+      :storage_dir => TEST_CACHE.to_s,
       :timeframe => "30d",
     },
   }
-  destination = jekyll_site().config["destination"]
+  destination = JekyllUtils::site().config["destination"]
   HTMLProofer.check_directory(destination, options).run
 end
