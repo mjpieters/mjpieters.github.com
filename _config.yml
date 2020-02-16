@@ -128,6 +128,7 @@ exclude:
 - "*.sublime-project"
 - "*.sublime-workspace"
 - ".jekyll-assets-cache"
+- ".gitignore"
 - _utilities
 - node_modules
 - bin

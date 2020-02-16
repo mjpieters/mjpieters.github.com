@@ -1,0 +1,11 @@
+.bundle
+.jekyll-metadata
+.ruby-version
+.sass-cache
+.vendor
+_site
+Gemfile.lock
+_utilities
+package-lock.json
+node_modules/
+.cache
