@@ -43,12 +43,26 @@ module SiteUtils
                          "Run `rake theme:update` to update the remote theme version"
     end
 
+    SiteUtils.uglifier
     Jekyll::Commands::Build.process(options)
+
     if serve
+      # look for JS updates
+      listener = Listen.to(
+        JSFILE.dirname.to_s,
+        only: Regexp.new(Regexp.escape(JSFILE.basename.to_s))
+      ) do |modified, added, removed|
+        SiteUtils.uglifier
+      end
+      listener.start # not blocking
+
       Jekyll::Commands::Serve.process(options)
     end
+
   rescue
     nil
+  ensure
+    listener.stop if serve
   end
 
   def SiteUtils.theme_uptodate()
@@ -80,6 +94,8 @@ module SiteUtils
       # mmistakes/minimal-mistakes#874
       file.write("---\n---\n\n" + compressed)
     end
+
+    Jekyll.logger.info "Zopatista JS:", "Re-uglified javascript"
   end
 end
 
