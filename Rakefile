@@ -8,7 +8,7 @@ TEST_CACHE = HERE / ".cache" / "htmlproofer"
 THEME_GEM = "minimal-mistakes-jekyll"
 THEME_REMOTE = "mmistakes/minimal-mistakes"
 
-module JekyllUtils
+module SiteUtils
   @@_site = nil
 
   def site()
@@ -61,13 +61,11 @@ end
 namespace :jekyll do
   desc "Build the site out"
   task :build do
-    include JekyllUtils
-    run(serve=false)
+    SiteUtils::run(serve=false)
   end
 
   task :serve do
-    include JekyllUtils
-    run
+    SiteUtils::run
   end
 end
 
@@ -75,7 +73,7 @@ namespace :theme do
   desc "Update theme version in config"
   task :update do
     require 'psych'
-    include JekyllUtils
+    include SiteUtils
     if theme_uptodate
       puts "Remote theme up-to-date"
       return
@@ -121,6 +119,6 @@ task :test => "jekyll:build" do
       :timeframe => "30d",
     },
   }
-  destination = JekyllUtils::site().config["destination"]
+  destination = SiteUtils::site().config["destination"]
   HTMLProofer.check_directory(destination, options).run
 end
