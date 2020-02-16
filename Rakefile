@@ -11,7 +11,7 @@ THEME_REMOTE = "mmistakes/minimal-mistakes"
 module SiteUtils
   @@_site = nil
 
-  def site()
+  def SiteUtils.site()
     # retrieve the jekyll site, with config
 
     @@_site ||= begin
@@ -23,7 +23,7 @@ module SiteUtils
     return @@_site
   end
 
-  def run(serve=true)
+  def SiteUtils.run(serve=true)
     options = site().config.merge({
       :watch => serve,
       :serving => serve,
@@ -48,7 +48,7 @@ module SiteUtils
     nil
   end
 
-  def theme_uptodate()
+  def SiteUtils.theme_uptodate()
     # check if the remote theme matches the gem version
     config = site().config
     theme_name, _, theme_version = config["remote_theme"].rpartition("@")
