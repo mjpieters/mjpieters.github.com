@@ -1,3 +1,8 @@
+/*!
+ * Zopatista.com custom JS
+ * (c) 2020 Martijn Pieters
+ * all rights reserved
+ */
 /* global grecaptcha */
 (($, window, document) => {
   const reCaptchaSiteKey = '6LfT7JoUAAAAAOJeXkJp-_YhnKEvnz3DhEM-ni2n'

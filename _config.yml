@@ -182,5 +182,3 @@ feed:
   path: atom.xml
 head_scripts:
 - https://www.google.com/recaptcha/api.js?render=6LfT7JoUAAAAAOJeXkJp-_YhnKEvnz3DhEM-ni2n
-after_footer_scripts:
-- "/assets/js/zopatista.js"

@@ -8,6 +8,9 @@ TEST_CACHE = HERE / ".cache" / "htmlproofer"
 THEME_GEM = "minimal-mistakes-jekyll"
 THEME_REMOTE = "mmistakes/minimal-mistakes"
 
+JSFILE = HERE / "assets" / "js" / "_zopatista.js"
+JSOUTPUT = HERE / "assets" / "js" / "main.min.js"
+
 module SiteUtils
   @@_site = nil
 
@@ -56,6 +59,28 @@ module SiteUtils
     gem_version = Gem.loaded_specs[THEME_GEM].version.to_s
     return theme_version == gem_version
   end
+
+  def SiteUtils.uglifier()
+    # uglify the JS sources
+
+    require 'uglifier'
+
+    theme_path = Pathname.new(Gem.loaded_specs[THEME_GEM].gem_dir)
+    theme_js_assets = theme_path / "assets" / "js"
+    js_assets = [
+      Pathname.glob(theme_js_assets / "vendor" / "**/*.js"),
+      Pathname.glob(theme_js_assets / "plugins" / "**/*.js"),
+      [theme_js_assets / "_main.js", JSFILE]
+    ].reduce([], :concat).map { |p| p.read }.join
+
+    compressed = Uglifier.compile(js_assets, harmony: true)
+    File.open(JSOUTPUT, "w") do |file|
+      # add a YAML front matter block (empty) so Jekyll picks this version
+      # over the one in the theme. See mmistakes/minimal-mistakes#722 and
+      # mmistakes/minimal-mistakes#874
+      file.write("---\n---\n\n" + compressed)
+    end
+  end
 end
 
 namespace :jekyll do
@@ -91,9 +116,12 @@ namespace :theme do
     end
     Jekyll.logger.info("Updated remote theme to #{gem_version}")
   end
-end
-    
 
+  desc "Uglify javascript code"
+  task :uglify do
+    SiteUtils::uglifier
+  end
+end
 
 
 desc "Serve up the site (watching for changes)"
