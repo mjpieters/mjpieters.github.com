@@ -27,6 +27,8 @@ module SiteUtils
   end
 
   def SiteUtils.run(serve=true)
+    require 'listen'
+
     options = site().config.merge({
       :watch => serve,
       :serving => serve,
@@ -60,9 +62,9 @@ module SiteUtils
     end
 
   rescue
-    nil
+    Jekyll.logger.error "Rake serve", "Exiting" 
   ensure
-    listener.stop if serve
+    listener.stop if serve and listener
   end
 
   def SiteUtils.theme_uptodate()
@@ -87,12 +89,9 @@ module SiteUtils
       [theme_js_assets / "_main.js", JSFILE]
     ].reduce([], :concat).map { |p| p.read }.join
 
-    compressed = Uglifier.compile(js_assets, harmony: true)
+    compressed, sourcemap = Uglifier.compile_with_map(js_assets, harmony: true)
     File.open(JSOUTPUT, "w") do |file|
-      # add a YAML front matter block (empty) so Jekyll picks this version
-      # over the one in the theme. See mmistakes/minimal-mistakes#722 and
-      # mmistakes/minimal-mistakes#874
-      file.write("---\n---\n\n" + compressed)
+      file.write(compressed)
     end
 
     Jekyll.logger.info "Zopatista JS:", "Re-uglified javascript"
