@@ -11,6 +11,7 @@ THEME_REMOTE = "mmistakes/minimal-mistakes"
 JSFILE = HERE / "assets" / "js" / "_zopatista.js"
 THEME_PATH = Pathname.new(Gem.loaded_specs[THEME_GEM].gem_dir)
 THEME_MAINJS = THEME_PATH / "assets" / "js" / "main.min.js"
+JSTARGET = JSFILE.dirname / THEME_MAINJS.basename
 
 module SiteUtils
   @@_site = nil
@@ -50,20 +51,29 @@ module SiteUtils
     Jekyll::Commands::Build.process(options)
 
     if serve
-      # look for JS updates
+      # copy the JS file to the _site assets too, and prevent Jekyll from
+      # clobbering it.
+      js_relative = JSFILE.relative_path_from(HERE)
+      js_assets = Pathname.new(options["destination"]) / js_relative.dirname
+      FileUtils.cp(JSFILE, js_assets)
+      options["keep_files"] << js_relative
+
+      # look for JS updates and re-uglify and copy
       listener = Listen.to(
         JSFILE.dirname.to_s,
         only: Regexp.new(Regexp.escape(JSFILE.basename.to_s))
       ) do |modified, added, removed|
         SiteUtils.uglifier
+        [JSFILE, ]
+        FileUtils.cp([JSFILE, JSTARGET], js_assets)
       end
       listener.start # not blocking
 
       Jekyll::Commands::Serve.process(options)
     end
 
-  rescue
-    Jekyll.logger.error "Rake serve", "Exiting" 
+  # rescue
+  #   Jekyll.logger.error "Rake serve", "Exiting" 
   ensure
     listener.stop if serve and listener
   end
@@ -80,23 +90,30 @@ module SiteUtils
   def SiteUtils.uglifier()
     # uglify JS source, append to original main.min.js
 
-    require 'uglifier'
-    
-    target = JSFILE.dirname / THEME_MAINJS.basename
-    FileUtils.cp(THEME_MAINJS, target)
-    File.open(target, "a") do |file|
-      file.write("\n")
-      compressed = Uglifier.compile(
+    require "base64"
+    require "json"
+    require "uglifier"
+
+    JSTARGET.open("w") do |file|
+      count = File.foreach(THEME_MAINJS).inject(0) do |c, line|
+        file.write(line.rstrip + "\n")
+        c + 1
+      end
+      compressed, sourcemap = Uglifier.compile_with_map(
         JSFILE.read,
         :harmony => true,
-        # :source_map => { 
-        #   :filename => JSFILE.basename.to_s
-        # }
+        :source_map => { :filename => JSFILE.basename.to_s }
       )
-      file.write(compressed)
+      file.write(compressed.rstrip + "\n")
+      
+      # adjust source map line count, then write out as base64 data URL
+      mapdata = JSON.parse(sourcemap)
+      mapdata["mappings"] = ";" * count + mapdata["mappings"]
+      b64sourcemap = Base64.strict_encode64(JSON.generate(mapdata))
+      file.write("//# sourceMappingURL=data:application/json;charset=utf-8;base64,#{b64sourcemap}\n")
     end
 
-    Jekyll.logger.info "Zopatista JS:", "Re-uglified javascript"
+    Jekyll.logger.info "JS:", "Compressed javascript"
   end
 end
 
