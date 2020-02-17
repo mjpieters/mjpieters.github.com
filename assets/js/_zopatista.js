@@ -1,7 +1,7 @@
 /*!
  * Zopatista.com custom JS
- * (c) 2020 Martijn Pieters
- * all rights reserved
+ * (c) 2020 Martijn Pieters (mj@zopatista.com)
+ * All rights reserved
  */
 /* global grecaptcha */
 (($, window, document) => {
