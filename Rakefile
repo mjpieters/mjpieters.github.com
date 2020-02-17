@@ -64,7 +64,6 @@ module SiteUtils
         only: Regexp.new(Regexp.escape(JSFILE.basename.to_s))
       ) do |modified, added, removed|
         SiteUtils.uglifier
-        [JSFILE, ]
         FileUtils.cp([JSFILE, JSTARGET], js_assets)
       end
       listener.start # not blocking
