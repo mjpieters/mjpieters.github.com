@@ -9,7 +9,8 @@ THEME_GEM = "minimal-mistakes-jekyll"
 THEME_REMOTE = "mmistakes/minimal-mistakes"
 
 JSFILE = HERE / "assets" / "js" / "_zopatista.js"
-JSOUTPUT = HERE / "assets" / "js" / "main.min.js"
+THEME_PATH = Pathname.new(Gem.loaded_specs[THEME_GEM].gem_dir)
+THEME_MAINJS = THEME_PATH / "assets" / "js" / "main.min.js"
 
 module SiteUtils
   @@_site = nil
@@ -77,20 +78,21 @@ module SiteUtils
   end
 
   def SiteUtils.uglifier()
-    # uglify the JS sources
+    # uglify JS source, append to original main.min.js
 
     require 'uglifier'
-
-    theme_path = Pathname.new(Gem.loaded_specs[THEME_GEM].gem_dir)
-    theme_js_assets = theme_path / "assets" / "js"
-    js_assets = [
-      Pathname.glob(theme_js_assets / "vendor" / "**/*.js"),
-      Pathname.glob(theme_js_assets / "plugins" / "**/*.js"),
-      [theme_js_assets / "_main.js", JSFILE]
-    ].reduce([], :concat).map { |p| p.read }.join
-
-    compressed, sourcemap = Uglifier.compile_with_map(js_assets, harmony: true)
-    File.open(JSOUTPUT, "w") do |file|
+    
+    target = JSFILE.dirname / THEME_MAINJS.basename
+    FileUtils.cp(THEME_MAINJS, target)
+    File.open(target, "a") do |file|
+      file.write("\n")
+      compressed = Uglifier.compile(
+        JSFILE.read,
+        :harmony => true,
+        # :source_map => { 
+        #   :filename => JSFILE.basename.to_s
+        # }
+      )
       file.write(compressed)
     end
 
