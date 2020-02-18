@@ -182,3 +182,4 @@ feed:
   path: atom.xml
 head_scripts:
 - https://www.google.com/recaptcha/api.js?render=6LfT7JoUAAAAAOJeXkJp-_YhnKEvnz3DhEM-ni2n
+- https://cdnjs.cloudflare.com/ajax/libs/stacktrace.js/2.0.2/stacktrace.min.js

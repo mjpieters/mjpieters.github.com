@@ -3,7 +3,7 @@
  * (c) 2020 Martijn Pieters (mj@zopatista.com)
  * All rights reserved
  */
-/* global grecaptcha */
+/* global grecaptcha, StackTrace */
 (($, window, document) => {
   const reCaptchaSiteKey = '6LfT7JoUAAAAAOJeXkJp-_YhnKEvnz3DhEM-ni2n'
   const reCaptchaTokenMaxAge = 2 * 60 * 1000 // ms, two minutes, see https://developers.google.com/recaptcha/docs/verify
@@ -75,6 +75,36 @@
         params.event_callback()
       }
     })
+
+    // Capture JS errors
+    const origOnerror = window.onerror
+    window.onerror = function (msg, file, line, col, error) {
+      if (typeof StackTrace !== 'undefined') {
+        StackTrace.fromError(error).then(tb => {
+          const descr = {
+            msg: msg,
+            file: file,
+            line: line,
+            col: col,
+            stack: tb
+          }
+          gtag('event', 'exception', {
+            description: JSON.stringify(descr),
+            fatal: true
+          })
+        }).catch(() => {
+          try {
+            gtag('event', 'exception', {
+              description: `Failure to create stacktrace; ${file}:${line}:${col} ${msg} (${error})`,
+              fatal: true
+            })
+          } catch (e) {
+            console.log('Giving up on all error handling, bailing out', e, [msg, file, line, col, error])
+          }
+        })
+      }
+      if (typeof origOnerror === 'function') origOnerror(msg, file, line, col, error)
+    }
 
     // Contact form handling
     if ($('.contactForm').length) {
