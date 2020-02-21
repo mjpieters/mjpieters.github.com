@@ -71,8 +71,6 @@ module SiteUtils
       Jekyll::Commands::Serve.process(options)
     end
 
-  # rescue
-  #   Jekyll.logger.error "Rake serve", "Exiting" 
   ensure
     listener.stop if serve and listener
   end
@@ -93,16 +91,23 @@ module SiteUtils
     require "json"
     require "uglifier"
 
-    JSTARGET.open("w") do |file|
-      count = File.foreach(THEME_MAINJS).inject(0) do |c, line|
-        file.write(line.rstrip + "\n")
-        c + 1
-      end
+    begin
       compressed, sourcemap = Uglifier.compile_with_map(
         JSFILE.read,
         :harmony => true,
         :source_map => { :filename => JSFILE.basename.to_s }
       )
+    rescue Uglifier::Error => e
+      Jekyll.logger.error 'Uglifier:', "error parsing JS"
+       e.message.lines.each { |l| Jekyll.logger.error '', l }
+      return
+    end
+
+    JSTARGET.open("w") do |file|
+      count = File.foreach(THEME_MAINJS).inject(0) do |c, line|
+        file.write(line.rstrip + "\n")
+        c + 1
+      end
       file.write(compressed.rstrip + "\n")
       
       # adjust source map line count, then write out as base64 data URL
