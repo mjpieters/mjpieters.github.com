@@ -328,5 +328,67 @@
         event_callback: callback
       })
     })
+
+    // Minimal JWT parsing
+    const parseToken = (t) => {
+      try {
+        return JSON.parse(window.atob(t.split('.')[1]))
+      } catch (e) { return {} }
+    }
+
+    // Meeting page
+    const meetingDiv = $('.online-meeting')
+    if (meetingDiv.length) {
+      const callFrame = window.DailyIframe.wrap(document.getElementById('daily-call-frame'))
+      const params = (new URL(document.location)).searchParams
+      const token = params.get('t')
+      const tokenData = token ? parseToken(token) : {}
+      const room = tokenData.r || params.get('r') || 'meeting'
+      const meetingContext = { room: room, token: token, tokenData: tokenData }
+
+      const trackEvent = (e) => {
+        gtag('event', 'meeting', {
+          event_category: e.action,
+          event_label: JSON.stringify({
+            ...meetingContext,
+            event: e
+          })
+        })
+      }
+      const joinConfig = {
+        url: `https://zopatista.daily.co/${room}`,
+        showFullscreenButton: true,
+        showLeaveButton: true
+      }
+      if (token) joinConfig.token = token
+      callFrame.join(joinConfig)
+      callFrame
+        .on('joining-meeting', trackEvent)
+        .on('joined-meeting', trackEvent)
+        .on('participant-joined', trackEvent)
+        .on('participant-updated', trackEvent)
+        .on('participant-left', trackEvent)
+        .on('network-quality-change', trackEvent)
+        .on('left-meeting', (e) => {
+          gtag('event', 'meeting', {
+            event_category: 'left-meeting',
+            event_label: JSON.stringify({
+              ...meetingContext,
+              event: e,
+              participants: callFrame.participants()
+            }),
+            event_callback: () => { document.location = '/' }
+          })
+        })
+        .on('error', (e) => {
+          gtag('event', 'exception', {
+            description: JSON.stringify({
+              ...meetingContext,
+              error: e
+            }),
+            fatal: false
+          })
+        })
+    }
   })
 })(window.jQuery, window, document)
