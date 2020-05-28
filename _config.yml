@@ -77,7 +77,7 @@ analytics:
     anonymize_ip: false
 author:
   name: Martijn Pieters
-  avatar: assets/images/mugshot.jpg
+  avatar: assets/images/avatar.jpg
   bio: Software Architect and Python mentor
   location: Cambridgeshire, UK
   email: 
