@@ -116,7 +116,10 @@
       const messageArea = form.find('#contact_message')
       const soFeedback = form.find('#stackoverflow_feedback')
       const soScore = form.find('#contact_soscore')
+      const gaIdField = form.find("#contact_gaid")
       let soFeedbackShown = false
+
+      ga(tracker => { gaIdField.val(tracker.get('clientId')) })
 
       const setReCaptcha = action => {
         grecaptcha.ready(() => {
