@@ -39,7 +39,6 @@ for your project? Send me a message and I'll respond as soon as possible.
   </div>
   <input type="hidden" name="_gotcha">
   <input type="hidden" id="contact_soscore" name="soscore" value="not scored">
-  <input type="hidden" id="contact_gaid" name="gaid" value="<unknown>">
   <input type="hidden" id="captchaResponse" name="g-recaptcha-response">
   <button type="submit" disabled="disabled">Send Message</button>
 </form>
