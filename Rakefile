@@ -32,8 +32,8 @@ module SiteUtils
     require 'listen'
 
     options = site().config.merge({
-      :watch => serve,
-      :serving => serve,
+      "watch" => serve,
+      "serving" => serve,
     }).merge( serve ? {:url => 'http://localhost:4000'} : {} )
 
     unless theme_uptodate
