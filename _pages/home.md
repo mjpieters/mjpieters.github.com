@@ -13,8 +13,6 @@ Software architect, Python mentor & Consultant with a long history in serious we
 
 I'm the top contributor on [Stack Overflow](https://stackoverflow.com/users/100297) for Python questions, ranked #9 overall and I was [elected ♦ Community Moderator](https://meta.stackoverflow.com/q/291017/100297) in 2015. 
 
-I have decades of experience with web applications, content management, database-driven applications, scalability, and data processing. I have worked in small consultancies, was an engineer at Facebook, and just about every size of company in between. **Can I help you too?**
+I have decades of experience with web applications, content management, database-driven applications, scalability, and data processing. I have worked in small consultancies, was an engineer at Facebook, and just about every size of company in between.
 
-[![arc()](https://assets.codementor.io/cmx-dev-badge.svg)](https://arc.dev/developers/?referral=mjpieters-1vw2ujpf3q){: rel=¨noopener¨ .align-left}
-
-I'm available as a [mentor and freelancer via Codementor](https://www.codementor.io/mjpieters). Book me for one-on-one sessions, freelance tasks or code reviews. Have a larger Python project you need implementing? Then [hire me through arc()](https://arc.dev/developers/?referral=mjpieters-1vw2ujpf3q) (*formerly Codementor X*). Or just use the [contact form](/contact/).
+I'm currently not available for consulting, unfortunately.
