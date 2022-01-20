@@ -56,7 +56,7 @@ module SiteUtils
       js_relative = JSFILE.relative_path_from(HERE)
       js_assets = Pathname.new(options["destination"]) / js_relative.dirname
       FileUtils.cp(JSFILE, js_assets)
-      options["keep_files"] << js_relative
+      options["keep_files"] << js_relative.to_s
 
       # look for JS updates and re-uglify and copy
       listener = Listen.to(
