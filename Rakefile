@@ -137,13 +137,13 @@ namespace :theme do
   task :update do
     require 'psych'
     include SiteUtils
-    if theme_uptodate
+    if SiteUtils.theme_uptodate
       puts "Remote theme up-to-date"
       return
     end
 
     gem_version = Gem.loaded_specs[THEME_GEM].version.to_s
-    site().config.config_files({}).each do |fname|
+    SiteUtils.site().config.config_files({}).each do |fname|
       data = YAML.load_file(fname)
       if data["remote_theme"]
         data["remote_theme"] = "#{THEME_REMOTE}@#{gem_version}"

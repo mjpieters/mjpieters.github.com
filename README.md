@@ -8,16 +8,28 @@ redirects would otherwise be too cumbersome to support.
 
 ## Setup
 
-Make sure `bundle` is installed:
+Install rbenv from homebrew, activate it, and install the [GitHub pages supported Ruby version](https://pages.github.com/versions/), from the `rbenv` local pin file:
 
 ```shell
-$ sudo gem install bundle
+$ brew install rbenv
+$ rbenv init
+$ rbenv install -s $(cat .ruby-version)
+```
+
+You'll need to [add rbenv to `.zshrc`](https://github.com/rbenv/rbenv#how-rbenv-hooks-into-your-shell).
+
+I should periodically update the ruby version used to follow GitHub.
+
+Once the ruby environment has been set up, make sure [bundler](https://bundler.io/) is installed:
+
+```shell
+$ gem install bundler
 ```
 
 then install all dependencies
 
 ```shell
-$ bundle install --path .vendor/bundle
+$ bundle install
 ```
 
 For more info, see the [GitHub pages documentation](https://help.github.com/articles/using-jekyll-with-pages).

@@ -25,18 +25,18 @@ defaults:
     comments: true
     share: true
     related: true
-remote_theme: mmistakes/minimal-mistakes@4.18.1
+remote_theme: mmistakes/minimal-mistakes@4.24.0
 minimal_mistakes_skin: default
 locale: en-GB
 title_separator: "-"
 name: Martijn Pieters
 description: Martijn Pieters — Software Architect and Python mentor
 url: https://www.zopatista.com
-baseurl: 
+baseurl:
 repository: mjpieters/mjpieters.github.com
-teaser: 
-logo: 
-masthead_title: 
+teaser:
+logo:
+masthead_title:
 words_per_minute: 200
 comments:
   provider: disqus
@@ -45,12 +45,12 @@ comments:
 atom_feed:
   path: "/atom.xml"
 search: true
-search_full_content: 
-search_provider: 
+search_full_content:
+search_provider:
 google_site_verification: 5C1zKRO9jFlOWxjE2vzONtXUMr1by47YM7XhzDv9foU
-bing_site_verification: 
-yandex_site_verification: 
-naver_site_verification: 
+bing_site_verification:
+yandex_site_verification:
+naver_site_verification:
 twitter:
   username: zopatista
 facebook:
@@ -59,8 +59,8 @@ facebook:
   publisher: https://www.zopatista.com
 og_image: assets/images/mugshot.jpg
 social:
-  type: 
-  name: 
+  type:
+  name:
   links:
   - https://stackoverflow.com/users/100297/martijn-pieters
   - https://github.com/mjpieters
@@ -80,7 +80,7 @@ author:
   avatar: assets/images/avatar.jpg
   bio: Software Architect and Python mentor
   location: Cambridgeshire, UK
-  email: 
+  email:
   links:
   - label: Stack Overflow
     icon: fab fa-fw fa-stack-overflow
