@@ -1,3 +1,6 @@
 ---
+---
+
+---
 BUNDLE_PATH: ".vendor/bundle"
 BUNDLE_BIN: "bin"
