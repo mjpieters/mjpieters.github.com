@@ -20,6 +20,7 @@ defaults:
     type: posts
   values:
     layout: single
+    description:
     author_profile: true
     read_time: true
     comments: true
