@@ -30,7 +30,7 @@ import logging
 import logging.handlers
 try:
     # Python 3.7 and newer, fast reentrant implementation
-    # witohut task tracking (not needed for that when logging)
+    # without task tracking (not needed for that when logging)
     from queue import SimpleQueue as Queue
 except ImportError:
     from queue import Queue
