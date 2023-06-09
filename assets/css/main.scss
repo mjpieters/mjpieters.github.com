@@ -80,7 +80,6 @@ blockquote {
   }
 
   .message-count {
-    display: relative;
     float: right;
     margin-top: 1ex;
     margin-right: 1em;
@@ -90,5 +89,10 @@ blockquote {
     &.near-limit {
       color: $warning-color;
     }
+  }
+
+  button[disabled] {
+    opacity: 50%;
+    cursor: unset;
   }
 }
