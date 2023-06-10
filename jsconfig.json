@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "module": "none",
+        "target": "es6",
+        "moduleResolution": "nodenext",
+        "baseUrl": ".",
+        "paths": {
+            "@daily-co": ["./node_modules/@daily-co/"]
+        }
+    },
+    "typeAcquisition": {
+        "include": [
+            "gtag.js",
+            "grecaptcha",
+            "jQuery",
+        ]
+    },
+    "include": ["assets/js/_*"],
+}

@@ -26,16 +26,18 @@ for your project? Send me a message and I'll respond as soon as possible.
     id="contact_message" required="required"
     name="message"></textarea>
     <i class="form-field-valid fas fa-check"></i></label>
-  <div id="stackoverflow_feedback" class="notice--warning">
-    <p>
-      If you are trying to contact me about Stack Overflow moderation actions, please be aware that I <em>will only respond to these on Stack Overflow itself</em>.
-    </p>
-    <p>
-      Please use existing options there: you can reply to moderator messages, use a custom flag on a post, use the <a href="https://stackoverflow.com/contact">Stack Overflow contact form</a> or post a question on <a href="https://meta.stackoverflow.com/">Meta Stack Overflow</a>.
-    </p>
-    <p>
-      I ignore all such messages sent to me directly. Sorry!
-    </p>
+  <div id="stackoverflow_feedback">
+    <div class="notice--warning">
+      <p>
+        If you are trying to contact me about Stack Overflow moderation actions, please be aware that I <em>will only respond to these on Stack Overflow itself</em>.
+      </p>
+      <p>
+        Please use existing options there: you can reply to moderator messages, use a custom flag on a post, use the <a href="https://stackoverflow.com/contact">Stack Overflow contact form</a> or post a question on <a href="https://meta.stackoverflow.com/">Meta Stack Overflow</a>.
+      </p>
+      <p>
+        I ignore all such messages sent to me directly. Sorry!
+      </p>
+    </div>
   </div>
   <input type="hidden" name="_gotcha">
   <input type="hidden" id="contact_soscore" name="soscore" value="not scored">

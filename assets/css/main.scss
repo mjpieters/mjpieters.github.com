@@ -6,6 +6,11 @@
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
+@mixin transition($value) {
+  -webkit-transition: $value;
+  transition: $value;
+}
+
 // the Stack Exchange flair is built around the content-box model
 // and doesn't reset the line-height.
 .se-flair, .se-flair * {
@@ -60,6 +65,10 @@ blockquote {
   }  
 }
 
+#error-dialog .header-link {
+  display: none;
+}
+
 .contactForm {
   .form-field-valid {
     display: none;
@@ -76,7 +85,17 @@ blockquote {
   }
 
   #stackoverflow_feedback {
-    display: none;
+    @include transition(max-height 0.5s ease-in-out);
+    overflow: hidden;
+    max-height: 0;
+
+    .notice--warning {
+      margin-top: 1em !important;
+    }
+
+    &.show {
+      max-height: 50ex;
+    }
   }
 
   .message-count {
