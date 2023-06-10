@@ -65,7 +65,9 @@ blockquote {
   }  
 }
 
-#error-dialog .header-link {
+// Don't show link targets in magnific popup headers
+// these are an artefact of how I build popups from markdown text
+.mpf-content .header-link {
   display: none;
 }
 
