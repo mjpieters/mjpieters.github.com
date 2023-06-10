@@ -15,4 +15,4 @@ I'm the top contributor on [Stack Overflow](https://stackoverflow.com/users/1002
 
 I have decades of experience with web applications, content management, database-driven applications, scalability, and data processing. I have worked in small consultancies, was an engineer at Facebook, and just about every size of company in between.
 
-Feel free to [Contact Me](/contact/) if you feel I could help you with your project, too.
+Feel free to [contact me](/contact/) if you feel I could help you with your project, too.
