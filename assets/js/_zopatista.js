@@ -301,7 +301,7 @@
 
       fetch(href, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-url-encoded', 'Accept': 'application/json' },
+        headers: { 'Accept': 'application/json' },
         body: new FormData(form)
       })
       .then((response) => {
