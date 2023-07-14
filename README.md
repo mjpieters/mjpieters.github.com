@@ -66,8 +66,6 @@ I am using [Minimal Mistakes](https://github.com/mmistakes/minimal-mistakes) as 
 * The style is customised purely in `_config.yml`.
 * The jekyll-redirect-to `redirect.html` layout was customised to add Google analytics.
 
-I've configured the theme both as a `remote_theme` entry (used by GitHub pages) and a local gem entry in the Gemfile. The latter will track the latest version if I use `bundle update`, and the rake file tests if the versions of this gem and the remote theme match. I can use `rake theme:update` to upgrade the theme reference if needed.
-
 ## Link integrity checking
 
 I've set up htmlproofer to check for link rot, run periodically with:
