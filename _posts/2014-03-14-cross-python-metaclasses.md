@@ -81,7 +81,7 @@ which results in a cleaner MRO:
 
 ## Update
 
-As it turns out, [Jason Coombs took Guido's time machine](https://bitbucket.org/gutworth/six/pull-request/12/add-patch_with_metaclass-which-provides-a) and added the same functionality to the `six` library last summer. Not only that, he included support for classes with `__slots__` in his version. Thanks to [Mikhail Korobov](http://kmike.ru/) for pointing this out.
+As it turns out, [Jason Coombs took Guido's time machine](https://github.com/benjaminp/six/commit/0163ad03b519fcde529a4473ba712d71a57ac4ba) and added the same functionality to the `six` library last summer. Not only that, he included support for classes with `__slots__` in his version. Thanks to [Mikhail Korobov](http://kmike.ru/) for pointing this out.
 
 The `six` decorator is called [`@six.add_metaclass()`](https://six.readthedocs.io/#six.add_metaclass):
 
