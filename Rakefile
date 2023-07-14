@@ -2,11 +2,11 @@ require 'rubygems'
 require 'bundler/setup'
 Bundler.require(:default, :development, :jekyll_plugins)
 require 'jekyll'
+require 'optparse'
 
 HERE = Pathname("./").expand_path
 TEST_CACHE = HERE / ".cache" / "htmlproofer"
 THEME_GEM = "minimal-mistakes-jekyll"
-THEME_REMOTE = "mmistakes/minimal-mistakes"
 
 JSFILE = HERE / "assets" / "js" / "_zopatista.js"
 THEME_PATH = Pathname.new(Gem.loaded_specs[THEME_GEM].gem_dir)
@@ -28,25 +28,15 @@ module SiteUtils
     return @@_site
   end
 
-  def SiteUtils.run(serve=true)
+  def SiteUtils.run(serve=true, baseurl=nil)
     require 'listen'
 
     options = site().config.merge({
       "watch" => serve,
       "serving" => serve,
+      "baseurl" => baseurl,
     }).merge( serve ? {:url => 'http://localhost:4000'} : {} )
-
-    unless theme_uptodate
-      Jekyll.logger.warn "Warning:",
-                         "Remote theme version doesn't match gem version"
-      Jekyll.logger.warn "",
-                         "Gem: #{Gem.loaded_specs[THEME_GEM].version.to_s}"
-      Jekyll.logger.warn "",
-                         "Remote theme: #{options['remote_theme'].rpartition('@')[-1]}"
-      Jekyll.logger.warn "",
-                         "Run `rake theme:update` to update the remote theme version"
-    end
-
+    
     SiteUtils.uglifier
     Jekyll::Commands::Build.process(options)
 
@@ -73,15 +63,6 @@ module SiteUtils
 
   ensure
     listener.stop if serve and listener
-  end
-
-  def SiteUtils.theme_uptodate()
-    # check if the remote theme matches the gem version
-    config = site().config
-    theme_name, _, theme_version = config["remote_theme"].rpartition("@")
-    raise "Unexpected remote theme name #{theme_name}" unless theme_name == THEME_REMOTE
-    gem_version = Gem.loaded_specs[THEME_GEM].version.to_s
-    return theme_version == gem_version
   end
 
   def SiteUtils.uglifier()
@@ -121,10 +102,19 @@ module SiteUtils
   end
 end
 
-namespace :jekyll do
+namespace :jekyll do |t, args|
   desc "Build the site out"
   task :build do
-    SiteUtils::run(serve=false)
+    options = {
+      :baseurl => nil,
+    }
+    opts = OptionParser.new
+    opts.banner = "Usage: rake jekyll:build [-- --baseurl URL]"
+    opts.on("--baseurl ARG") { |url| options[:baseurl] = url }
+    args = opts.order!(ARGV) {}
+    opts.parse!(args)
+    SiteUtils::run(serve=false, baseurl=options[:baseurl])
+    exit
   end
 
   task :serve do
@@ -133,28 +123,6 @@ namespace :jekyll do
 end
 
 namespace :theme do
-  desc "Update theme version in config"
-  task :update do
-    require 'psych'
-    include SiteUtils
-    if SiteUtils.theme_uptodate
-      puts "Remote theme up-to-date"
-      return
-    end
-
-    gem_version = Gem.loaded_specs[THEME_GEM].version.to_s
-    SiteUtils.site().config.config_files({}).each do |fname|
-      data = YAML.load_file(fname)
-      if data["remote_theme"]
-        data["remote_theme"] = "#{THEME_REMOTE}@#{gem_version}"
-        File.open(fname, 'w') do |file|
-          file.write(YAML.dump(data))
-        end
-      end    
-    end
-    Jekyll.logger.info("Updated remote theme to #{gem_version}")
-  end
-
   desc "Uglify javascript code"
   task :uglify do
     SiteUtils::uglifier

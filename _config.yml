@@ -26,14 +26,13 @@ defaults:
     comments: true
     share: true
     related: true
-remote_theme: mmistakes/minimal-mistakes@4.24.0
+theme: minimal-mistakes-jekyll
 minimal_mistakes_skin: default
 locale: en-GB
 title_separator: "-"
 name: Martijn Pieters
 description: Martijn Pieters — Software Architect and Python mentor
 url: https://www.zopatista.com
-baseurl: 
 repository: mjpieters/mjpieters.github.com
 teaser: 
 logo: 
@@ -123,15 +122,12 @@ include:
 exclude:
 - README.md
 - CNAME
-- Gemfile
-- Gemfile.lock
 - Rakefile
 - "*.sublime-project"
 - "*.sublime-workspace"
 - ".jekyll-assets-cache"
 - ".gitignore"
 - _utilities
-- node_modules
 - bin
 encoding: utf-8
 markdown_ext: markdown,mkdown,mkdn,mkd,md
@@ -152,23 +148,11 @@ kramdown:
 sass:
   sass_dir: _sass
   style: compressed
+  # Disable printing deprecation warnings to terminal, see mmistakes/minimal-mistakes#4054
+  quiet_deps: true
 permalink: "/:categories/:year/:month/:day/:title/"
 paginate: 5
 paginate_path: "/blog/page:num/"
-plugins:
-- jekyll-sitemap
-- jekyll-feed
-- jemoji
-- jekyll-include-cache
-- jekyll-redirect-from
-whitelist:
-- jekyll-paginate
-- jekyll-sitemap
-- jekyll-gist
-- jekyll-feed
-- jemoji
-- jekyll-include-cache
-- jekyll-redirect-from
 category_archive:
   type: liquid
   path: "/categories/"
