@@ -26,6 +26,7 @@ defaults:
     comments: true
     share: true
     related: true
+    classes: wide
 theme: minimal-mistakes-jekyll
 minimal_mistakes_skin: default
 locale: en-GB
