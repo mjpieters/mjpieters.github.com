@@ -8,7 +8,7 @@ redirects would otherwise be too cumbersome to support.
 
 ## Setup
 
-Install rbenv from homebrew, activate it, and install the [GitHub pages supported Ruby version](https://pages.github.com/versions/), from the `rbenv` local pin file:
+Install rbenv from homebrew, activate it, and install a [supported Ruby version](https://github.com/ruby/setup-ruby), from the `rbenv` local pin file:
 
 ```shell
 $ brew install rbenv
