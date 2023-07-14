@@ -148,6 +148,7 @@ kramdown:
 sass:
   sass_dir: _sass
   style: compressed
+  # Disable printing deprecation warnings to terminal, see mmistakes/minimal-mistakes#4054
   quiet_deps: true
 permalink: "/:categories/:year/:month/:day/:title/"
 paginate: 5
