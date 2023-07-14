@@ -135,22 +135,23 @@ task :serve => "jekyll:serve"
 
 
 desc "Check the site for linking issues"
-task :test => "jekyll:build" do
+task :test do
+  SiteUtils::run(serve=false)
+
   require 'html-proofer'
 
   options = {
-  	:assume_extension => true,
+    :assume_extension => true,
   	:allow_hash_href => true,
-  	:http_status_ignore => [999],  # because LinkedIn doesn't like being pinged
-  	:check_html => true,
-  	:check_img_http => true,
-  	:check_opengraph => true,
-    :parallel => {
-      :in_processes => 3
-    },
+  	:only_4xx => true,
+    :checks => ["Links", "Images", "Scripts", "OpenGraph"],
+    :enforce_https => false,
     :cache => {
       :storage_dir => TEST_CACHE.to_s,
-      :timeframe => "30d",
+      :timeframe => {
+        :external => "30d",
+        :internal => "1w",
+      },
     },
   }
   destination = SiteUtils::site().config["destination"]
