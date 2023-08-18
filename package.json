@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "@daily-co/daily-js": "^0.48.0",
+    "@daily-co/daily-js": "^0.49.1",
     "stacktrace-js": "^2.0.2"
   }
 }
