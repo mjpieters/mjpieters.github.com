@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'jekyll', '~> 4.4'
-gem 'minimal-mistakes-jekyll', '~> 4.26.2'
+gem 'minimal-mistakes-jekyll', '~> 4.27.0'
 
 group :jekyll_plugins do
 	gem 'jekyll-sitemap'
